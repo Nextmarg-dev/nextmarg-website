@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { promise } from '../data/content';
+
+const values = [
+  { title: 'Clarity', text: 'Plain language, clear scope, fixed quotes. No jargon, no surprises.' },
+  { title: 'Ownership', text: 'One person plans, coordinates and answers for delivery.' },
+  { title: 'Craft', text: 'Global-brand standards on every deliverable, with human review on all AI-assisted work.' },
+  { title: 'Steady growth', text: 'We measure leads and sales, not just clicks, and improve every month.' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Nextmarg',
+    url: `${site.url}/about`,
+    about: { '@id': `${site.url}/#org` },
+    mainEntity: {
+      '@type': 'Person',
+      '@id': `${site.url}/about#founder`,
+      name: site.founder,
+      jobTitle: 'Founder',
+      worksFor: { '@id': `${site.url}/#org` },
+      description: 'Digital program manager with 15+ years of experience delivering web, performance marketing, SEO and social media programs for global brands including VMware, Wipro, ITC and Quest Global.',
+      ...(site.linkedinFounder && { sameAs: [site.linkedinFounder] }),
+    },
+  },
+];
+---
+
+<Base
+  title="About"
+  description="Nextmarg means the next path. A founder-led digital agency in Bengaluru, started by Preetham Ram after 15+ years delivering digital programs for VMware, Wipro, ITC and Quest Global."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">About Nextmarg</span>
+      <h1 class="display" style="max-width:860px">Next + marg: the next path</h1>
+      <p class="lead">
+        Marg (मार्ग) means path in Hindi, Sanskrit and Kannada. Nextmarg is the next step a business takes in digital, planned and walked
+        with us. The name joins a global word with an Indian one, and the story is rooted in Bengaluru.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap founder">
+      <div class="founder-photo" aria-hidden="true">PR</div>
+      <div>
+        <span class="kicker">Founder</span>
+        <h2>{site.founder}</h2>
+        <p class="lead">
+          Preetham is a digital program manager with 15+ years of experience delivering web, performance marketing, SEO and social media
+          programs for global brands and fast-growing companies.
+        </p>
+        <p>
+          He has led event web experiences for VMware at Mobile World Congress, a website revamp for Quest Global, a digital community program
+          for ITC, social media for Wipro Talent Acquisition and more than 1,000 Fortune 500 partner campaigns.
+        </p>
+        <p>
+          He started Nextmarg because growing businesses deserve the same standard of digital work as large brands: a plan you understand, work
+          delivered on time, and reports tied to real results.
+        </p>
+        {site.linkedinFounder && <div class="actions"><a class="btn btn--ghost" href={site.linkedinFounder} rel="noopener">Connect on LinkedIn</a></div>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Our values</span>
+        <h2>Calm, clear, quietly confident</h2>
+      </div>
+      <div class="grid grid--4">
+        {values.map((v) => (
+          <div class="card">
+            <h3>{v.title}</h3>
+            <p class="muted">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">The Nextmarg promise</span>
+        <h2>What you can hold us to</h2>
+      </div>
+      <div class="grid grid--3">
+        {promise.map((p) => (
+          <div class="card">
+            <h3>{p.title}</h3>
+            <p class="muted">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

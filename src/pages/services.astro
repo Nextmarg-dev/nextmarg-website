@@ -1,0 +1,193 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+import { groups, growthPartner, offers, bundles } from '../data/services';
+
+const faqs = [
+  {
+    q: 'What is the difference between SEO, AEO, GEO and AIO?',
+    a: "SEO gets you ranked in Google's normal results. AEO (Answer Engine Optimisation) gets your content picked as the answer in answer boxes and voice assistants. GEO (Generative Engine Optimisation) gets you mentioned by AI chatbots like ChatGPT, Gemini, Perplexity and Claude. AIO (AI Overviews Optimisation) gets you cited in the AI summary at the top of Google.",
+  },
+  {
+    q: 'Do you charge a fixed price?',
+    a: "Yes for one-time projects such as websites, tool setups, audits, brand kits and workshops. Monthly plans have a simple monthly fee with 30 days' notice and no lock-in.",
+  },
+  {
+    q: 'Do you deliver everything yourselves?',
+    a: 'Nextmarg plans and manages every project. For video editing, motion graphics, influencer campaigns and complex e-commerce builds we work with trusted specialists, and we check their work before it reaches you.',
+  },
+  {
+    q: 'Are you ready for India\'s DPDP Act?',
+    a: "Yes. We set up consent banners, compliant lead forms and consent-mode tracking. India's Digital Personal Data Protection rules apply in full to businesses from 13 May 2027.",
+  },
+];
+
+const schema = [
+  ...groups.map((g) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${site.url}/services#${g.id}`,
+    name: g.title,
+    serviceType: g.kicker,
+    description: g.summary,
+    provider: { '@id': `${site.url}/#org` },
+    areaServed: 'India',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: g.title,
+      itemListElement: g.services.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, description: s.what } })),
+    },
+  })),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'OfferCatalog',
+    name: 'Nextmarg fixed-price starting points',
+    itemListElement: offers.map((o) => ({
+      '@type': 'Offer',
+      name: o.name,
+      description: o.what,
+      priceCurrency: 'INR',
+      ...(o.price === 'Free' ? { price: '0' } : { priceSpecification: { '@type': 'PriceSpecification', minPrice: o.price.replace(/[^0-9]/g, ''), priceCurrency: 'INR' } }),
+      seller: { '@id': `${site.url}/#org` },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.url}/services` },
+    ],
+  },
+];
+---
+
+<Base
+  title="Services and prices"
+  description="Websites, SEO and AI search (AEO, GEO, AIO), Google Business Profile, ads, CRM, GA4, WhatsApp automation and newsletters. Fixed-price starting points from a Bengaluru digital agency."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Services</span>
+      <h1 class="display" style="max-width:860px">Start from your problem. We'll find the path.</h1>
+      <p class="lead">
+        Nextmarg offers seven groups of digital services for growing businesses in Bengaluru and across India, plus a part-time marketing head.
+        Every plan includes tracking, so you can see which rupee brought which lead.
+      </p>
+      <nav class="actions" aria-label="Service groups" style="gap:8px">
+        {groups.map((g) => <a class="btn btn--ghost" style="min-height:40px;padding:8px 14px;font-size:14px" href={`#${g.id}`}>{g.title}</a>)}
+        <a class="btn btn--ghost" style="min-height:40px;padding:8px 14px;font-size:14px" href="#prices">Prices</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section" id="prices">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Popular starting points</span>
+        <h2>Fixed prices, quoted before we start</h2>
+        <p class="lead">Every business is different, so these are starting prices. You get a written, fixed quote after a free call.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="offers">
+          <thead><tr><th>Offer</th><th>What you get</th><th>Starting price (INR)</th></tr></thead>
+          <tbody>
+            {offers.map((o) => (
+              <tr>
+                <td><strong>{o.name}</strong><span class="m-price">{o.price}{o.unit && ` ${o.unit}`}</span></td>
+                <td>{o.what}</td>
+                <td class="price">{o.price}{o.unit && <span class="muted" style="font-weight:400"> {o.unit}</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {groups.map((g, i) => (
+    <section class={`section ${i % 2 === 0 ? 'section--sage' : ''}`} id={g.id}>
+      <div class="wrap">
+        <div class="grid grid--2" style="gap:40px;align-items:start">
+          <div>
+            <span class="num">{g.num} · {g.kicker}</span>
+            <h2>{g.title}</h2>
+            <p class="quote" style="font-size:19px;line-height:30px">"{g.problem}"</p>
+            <p class="lead">{g.summary}</p>
+            <p><strong>Best for:</strong> {g.bestFor}</p>
+            {g.id === 'get-found' && (
+              <p class="small muted">We promise the work and the tracking. Nobody can guarantee a place in AI answers, and we won't pretend to.</p>
+            )}
+            <div class="actions"><a class="btn" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>Start with a free score</a></div>
+          </div>
+          <div>
+            {g.services.map((s) => (
+              <div class="service">
+                <h4>{s.name}</h4>
+                <p>{s.what}</p>
+                <p class="example"><b>EXAMPLE</b>{s.example}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section section--forest" id="growth-partner">
+    <div class="wrap">
+      <div class="grid grid--2" style="gap:40px;align-items:center">
+        <div>
+          <span class="kicker">Monthly · {growthPartner.kicker}</span>
+          <h2>{growthPartner.title}</h2>
+          <p class="lead">"{growthPartner.problem}"</p>
+        </div>
+        <div>
+          <p>{growthPartner.summary}</p>
+          <p class="muted"><strong style="color:var(--sand)">Example:</strong> {growthPartner.example}</p>
+          <p><strong>From ₹40,000 a month.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Ready-made plans</span>
+        <h2>Pick a plan, or mix your own</h2>
+      </div>
+      <div class="grid grid--3">
+        {bundles.map((b) => (
+          <div class="card">
+            <span class="num">{b.who}</span>
+            <h3>{b.name}</h3>
+            <p class="muted">{b.what}</p>
+          </div>
+        ))}
+        <a class="card" href="/digital-health-score" style="background:var(--forest);color:var(--linen);border-color:var(--forest)">
+          <span class="num" style="color:var(--sand)">Every business, as a first step</span>
+          <h3>Digital Health Score</h3>
+          <p style="color:rgba(246,242,234,.85)">A free 30-point check with a one-page scorecard and your top five fixes.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions about our services</h2></div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

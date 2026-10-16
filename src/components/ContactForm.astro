@@ -1,0 +1,77 @@
+---
+import { site } from '../data/site';
+interface Props { subject: string; healthScore?: boolean; button?: string }
+const { subject, healthScore = false, button = 'Send' } = Astro.props;
+const id = healthScore ? 'health-score-form' : 'contact-form';
+---
+
+<form class="form" id={id} action="https://api.web3forms.com/submit" method="POST" data-form-name={healthScore ? 'digital_health_score' : 'contact'}>
+  <input type="hidden" name="access_key" value={site.web3formsKey} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value="nextmarg.com" />
+  <input type="hidden" name="redirect" value={`${site.url}/thank-you`} />
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+  <input type="hidden" name="source_page" value="" />
+  <input type="hidden" name="utm" value="" />
+
+  <div class="field">
+    <label for={`${id}-name`}>Your name</label>
+    <input id={`${id}-name`} name="name" autocomplete="name" required />
+  </div>
+  <div class="field">
+    <label for={`${id}-business`}>Business name</label>
+    <input id={`${id}-business`} name="business" autocomplete="organization" required />
+  </div>
+  {healthScore ? (
+    <div class="field">
+      <label for={`${id}-website`}>Website or Google listing (if you have one)</label>
+      <input id={`${id}-website`} name="website" type="text" inputmode="url" placeholder="yourbusiness.com" />
+    </div>
+  ) : (
+    <div class="field">
+      <label for={`${id}-email`}>Email</label>
+      <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+    </div>
+  )}
+  <div class="field">
+    <label for={`${id}-phone`}>WhatsApp number</label>
+    <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91" required />
+  </div>
+  {!healthScore && (
+    <div class="field">
+      <label for={`${id}-message`}>What would you like help with?</label>
+      <textarea id={`${id}-message`} name="message"></textarea>
+    </div>
+  )}
+  <label class="consent">
+    <input type="checkbox" name="consent" value="yes" required />
+    <span>I agree that Nextmarg may use these details to contact me about my enquiry, as set out in the <a href="/privacy">privacy notice</a>.</span>
+  </label>
+  <button class="btn" type="submit"><span class="dot" aria-hidden="true"></span>{button}</button>
+  <p class="small muted" style="margin:0">We reply on WhatsApp or email within one working day.</p>
+</form>
+
+<script is:inline define:vars={{ id, hasKey: Boolean(site.web3formsKey), wa: site.whatsapp }}>
+  (function () {
+    var f = document.getElementById(id);
+    if (!f) return;
+    f.source_page.value = location.pathname;
+    var p = new URLSearchParams(location.search);
+    var utm = ['utm_source', 'utm_medium', 'utm_campaign'].map(function (k) { return p.get(k) ? k + '=' + p.get(k) : null; }).filter(Boolean).join('&');
+    try {
+      if (utm) sessionStorage.setItem('nm-utm', utm);
+      f.utm.value = utm || sessionStorage.getItem('nm-utm') || '';
+    } catch (e) { f.utm.value = utm; }
+    f.addEventListener('submit', function (e) {
+      window.dataLayer && window.dataLayer.push({ event: 'generate_lead', form_name: f.getAttribute('data-form-name') });
+      if (hasKey) return;
+      // No form service key yet: send the enquiry through WhatsApp instead.
+      e.preventDefault();
+      var lines = [f.subject.value];
+      ['name', 'business', 'website', 'email', 'phone', 'message'].forEach(function (k) {
+        if (f[k] && f[k].value) lines.push(k.charAt(0).toUpperCase() + k.slice(1) + ': ' + f[k].value);
+      });
+      window.location.href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(lines.join('\n'));
+    });
+  })();
+</script>

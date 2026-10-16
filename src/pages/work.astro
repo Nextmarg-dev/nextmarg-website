@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { work } from '../data/content';
+---
+
+<Base
+  title="Track record"
+  description="Digital programs led by Nextmarg's founder for VMware, Quest Global, ITC, Wipro and Fortune 500 partner campaigns: event sites, website revamps, SEO and social."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Track record</span>
+      <h1 class="display" style="max-width:820px">Experience you can rely on</h1>
+      <p class="lead">
+        Programs our founder, Preetham Ram, has led for leading brands in previous roles at digital agencies. The same standards now go into
+        every Nextmarg project.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid--3">
+      {work.map((w) => (
+        <article class="card">
+          <span class="num">{w.type}</span>
+          <h2 class="h3">{w.client}</h2>
+          <div class="stat" style="font-size:32px;margin:12px 0">{w.result}</div>
+          <p class="muted">{w.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap" style="max-width:820px">
+      <span class="kicker">Nextmarg case studies</span>
+      <h2>New client stories are on the way</h2>
+      <p class="lead">
+        As Nextmarg projects go live, we'll add them here in the same format: the problem, what we did, and the result in numbers.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand title="Want results like these for your business?" />
+</Base>

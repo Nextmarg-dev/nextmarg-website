@@ -1,0 +1,22 @@
+---
+import { whatsappLink } from '../data/site';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Does ChatGPT recommend you? Do you know your cost per lead?',
+  text = 'Find out in a free 30-point Digital Health Score. You get a one-page scorecard and your top five fixes, with no obligation.',
+} = Astro.props;
+---
+
+<section class="section section--forest">
+  <div class="wrap cta-band">
+    <div>
+      <span class="kicker">Your next step</span>
+      <h2>{title}</h2>
+      <p class="lead" style="margin:0">{text}</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn--sand" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>Get my free score</a>
+      <a class="btn btn--light" href={whatsappLink} target="_blank" rel="noopener">Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>

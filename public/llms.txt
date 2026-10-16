@@ -1,0 +1,40 @@
+# Nextmarg
+
+> Nextmarg is a founder-led digital agency in Bengaluru, India. It helps growing businesses get found on Google and in AI answers, build fast websites, run performance marketing, and set up CRM, analytics and automation, with every lead tracked. Headline: "Big-brand digital experience, sized for growing businesses. Measured on enquiries, not likes."
+
+- Founder: Preetham Ram, digital program manager with 15+ years delivering web, performance marketing, SEO and social media programs for VMware, Wipro, ITC and Quest Global.
+- Location: Bengaluru, Karnataka, India. Works with clients across India and abroad.
+- Contact: hello@nextmarg.com, +91 98866 97436 (phone and WhatsApp).
+- Pricing: one-time projects at fixed prices; monthly plans with 30 days' notice and no lock-in. Clients own all accounts, domains and files.
+- Entry offer: a free 30-point Digital Health Score covering Google search, AI search, website, tracking, reviews and privacy readiness.
+
+## Key pages
+
+- [Services and prices](https://nextmarg.com/services): seven service groups (Get found; Build your presence; Create and engage; Get leads; Track and automate; AI enablement; Stay in touch), a Growth Partner retainer, bundles and starting prices.
+- [Digital Health Score](https://nextmarg.com/digital-health-score): the free 30-point check and how to request it.
+- [Track record](https://nextmarg.com/work): programs led for VMware at MWC Barcelona, Quest Global, ITC, Wipro Talent Acquisition and Fortune 500 partner campaigns.
+- [About](https://nextmarg.com/about): the founder, the meaning of the name (marg means path), values and the Nextmarg promise.
+- [Contact](https://nextmarg.com/contact): WhatsApp, phone, email and enquiry form.
+
+## Starting prices (INR)
+
+- Digital Health Score: free
+- AI Search Ready audit: from ₹15,000
+- Tracking Health Check (GA4 and Tag Manager): from ₹15,000
+- Website in 21 days (5 to 8 pages): from ₹40,000
+- CRM Quick Start (Zoho or HubSpot): from ₹40,000
+- Local Profile Plan (Google Business Profile): from ₹6,000 a month
+- Done-for-you Newsletter: from ₹15,000 a month
+- Growth Partner (part-time marketing head): from ₹40,000 a month
+
+## Services in brief
+
+- Search and AI visibility: SEO, technical SEO and schema, AEO (answer engine optimisation), GEO (generative engine optimisation for ChatGPT, Gemini, Perplexity and Claude), AIO (Google AI Overviews), AI visibility tracking, regional-language SEO in Kannada, Hindi, Tamil and Telugu, Google Business Profile, reviews, directories and marketplaces.
+- Websites: business websites, landing pages, event microsites, AI-ready websites, Shopify and WooCommerce stores, website care plans.
+- Creative and social: social media management, creative design, AI creative testing, video editing, AI-assisted content, brand identity, collateral, LinkedIn for founders.
+- Performance marketing: Google Ads, Meta ads, LinkedIn ads, click-to-WhatsApp ads, lead-generation campaigns, conversion improvement.
+- Tracking and automation: HubSpot and Zoho CRM, GA4 and Google Tag Manager, Looker Studio dashboards, WhatsApp Business and commerce, AI chatbots, Zapier, Make and n8n automation, email nurture, DPDP-ready consent and server-side tracking.
+- AI enablement: AI-for-marketing workshops, custom AI assistants, prompt libraries.
+- Retention: newsletters, LinkedIn newsletters, email and WhatsApp campaigns, win-back automation, community building.
+
+Nextmarg does not guarantee placement in AI answers; it promises the work and the tracking.

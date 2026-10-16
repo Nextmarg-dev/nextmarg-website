@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Faq from '../components/Faq.astro';
+import { site, whatsappLink } from '../data/site';
+
+const areas = [
+  { name: 'Google search', points: 6, checks: 'Rankings for your main services, page titles, speed, mobile use, indexing errors and schema.' },
+  { name: 'AI search', points: 5, checks: 'Whether ChatGPT, Gemini, Perplexity and Google AI Overviews mention you for 10 real customer questions.' },
+  { name: 'Website', points: 6, checks: 'Clear service pages, calls to action, forms, WhatsApp, trust signals and load time on a phone.' },
+  { name: 'Tracking', points: 5, checks: 'GA4 and Tag Manager setup, conversion events, lead source tracking and a usable report.' },
+  { name: 'Reviews and local', points: 5, checks: 'Google Business Profile completeness, review count and replies, and matching directory listings.' },
+  { name: 'Privacy readiness', points: 3, checks: 'Consent banner, lead form consent and a privacy notice, ahead of the DPDP Act deadline.' },
+];
+
+const sample = [
+  { name: 'Google search', score: 4, of: 6 },
+  { name: 'AI search', score: 1, of: 5 },
+  { name: 'Website', score: 4, of: 6 },
+  { name: 'Tracking', score: 2, of: 5 },
+  { name: 'Reviews and local', score: 3, of: 5 },
+  { name: 'Privacy readiness', score: 0, of: 3 },
+];
+
+const faqs = [
+  { q: 'Is it really free?', a: 'Yes. The Digital Health Score is free with no obligation. It is how we get to know your business, and many clients find the top five fixes useful on their own.' },
+  { q: 'How long does it take?', a: 'We send your scorecard within 3 working days of receiving your details, then walk you through it on a 30-minute call or WhatsApp.' },
+  { q: 'What do you need from me?', a: 'Your business name, website or Google listing, and a WhatsApp number. For the tracking check we may ask for view-only access to Google Analytics, which you can remove afterwards.' },
+  { q: 'Will you tell me to buy everything?', a: 'No. You get your top five fixes in priority order. Some you can do yourself; for the rest we will suggest the smallest step that makes a difference.' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${site.url}/digital-health-score#service`,
+    name: 'Digital Health Score',
+    description: 'A free 30-point check of a business\'s Google and AI search presence, website, tracking, reviews and privacy readiness, with a one-page scorecard and the top five fixes.',
+    provider: { '@id': `${site.url}/#org` },
+    areaServed: 'India',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title="Free Digital Health Score"
+  description="Does ChatGPT recommend your business? Do you know your cost per lead? Get a free 30-point Digital Health Score from Nextmarg, with your top five fixes."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap grid grid--2" style="gap:48px;align-items:start">
+      <div>
+        <span class="kicker">Free · 30 points · No obligation</span>
+        <h1 class="display">Your free Digital Health Score</h1>
+        <p class="sub" style="font-size:22px;line-height:30px;font-weight:600;color:var(--clay-deep)">Does ChatGPT recommend you? Do you know your cost per lead?</p>
+        <p class="lead">
+          We check 30 points across Google, AI search, your website, tracking, reviews and privacy readiness. You get a one-page scorecard and
+          your top five fixes within 3 working days.
+        </p>
+        <ul class="ticks" style="margin-top:20px">
+          <li>Checked by a person with 15+ years in digital, not an automated tool</li>
+          <li>Plain-language results, no jargon</li>
+          <li>Useful whether or not you work with us</li>
+        </ul>
+      </div>
+      <div class="card" id="get-score">
+        <h2 class="h3" style="font-size:22px;line-height:28px">Get my free score</h2>
+        <p class="muted">Four quick details. We'll message you on WhatsApp to confirm.</p>
+        <ContactForm subject="New Digital Health Score request" healthScore button="Get my free score" />
+        <p class="small muted" style="margin:16px 0 0">
+          Prefer to chat? <a href={whatsappLink} target="_blank" rel="noopener">Message us on WhatsApp</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What we check</span>
+        <h2>30 points in six areas</h2>
+      </div>
+      <div class="grid grid--3">
+        {areas.map((a) => (
+          <div class="card">
+            <span class="num">{a.points} points</span>
+            <h3>{a.name}</h3>
+            <p class="muted">{a.checks}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap grid grid--2" style="gap:48px;align-items:center">
+      <div>
+        <span class="kicker">What you get</span>
+        <h2>A one-page scorecard and your top five fixes</h2>
+        <p class="lead">
+          The scorecard shows where you stand in each area. The fixes are in priority order, with what each one will change for your enquiries.
+        </p>
+        <p class="small muted">The scorecard on this page is an illustration, not a real client's results.</p>
+      </div>
+      <div class="scorecard" aria-label="Sample scorecard">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+          <strong>Sample business</strong>
+          <span class="stat" style="font-size:40px;margin:0">14<span class="muted" style="font-size:20px">/30</span></span>
+        </div>
+        {sample.map((s) => (
+          <div class="score-row">
+            <span>{s.name}</span>
+            <span>{s.score}/{s.of}</span>
+            <div class="bar"><span class={s.score / s.of < 0.5 ? 'low' : ''} style={`width:${Math.max(4, (s.score / s.of) * 100)}%`}></span></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions about the Digital Health Score</h2></div>
+      <Faq items={faqs} />
+      <div class="actions"><a class="btn" href="#get-score"><span class="dot" aria-hidden="true"></span>Get my free score</a></div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,168 @@
+---
+import '@fontsource-variable/inter/opsz.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, whatsappLink } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  schema?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const { title, description, schema = [], noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), site.url).href;
+const ogImage = new URL('/og-image.png', site.url).href;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
+const fullTitle = isHome ? `${site.name}: ${site.headline.replace(/\.$/, '')}` : `${title} | ${site.name}`;
+
+const sameAs = [site.linkedinCompany, site.instagram, site.x, site.googleBusinessProfile].filter(Boolean);
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${site.url}/#org`,
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/brand/nextmarg-app-icon-forest.png`,
+  image: ogImage,
+  slogan: site.tagline,
+  description: site.description,
+  email: site.email,
+  telephone: site.phone,
+  priceRange: '₹₹',
+  address: {
+    '@type': 'PostalAddress',
+    ...(site.streetAddress && { streetAddress: site.streetAddress }),
+    ...(site.postalCode && { postalCode: site.postalCode }),
+    addressLocality: site.city,
+    addressRegion: site.region,
+    addressCountry: site.country,
+  },
+  areaServed: [{ '@type': 'City', name: 'Bengaluru' }, { '@type': 'Country', name: 'India' }],
+  founder: {
+    '@type': 'Person',
+    '@id': `${site.url}/about#founder`,
+    name: site.founder,
+    jobTitle: 'Founder',
+    ...(site.linkedinFounder && { sameAs: [site.linkedinFounder] }),
+  },
+  knowsAbout: [
+    'Search engine optimisation',
+    'Answer engine optimisation',
+    'Generative engine optimisation',
+    'Google AI Overviews',
+    'Website development',
+    'Google Ads',
+    'Meta ads',
+    'HubSpot',
+    'Zoho CRM',
+    'Google Analytics 4',
+    'Google Tag Manager',
+    'WhatsApp Business',
+    'Marketing automation',
+    'DPDP Act compliance',
+  ],
+  ...(sameAs.length && { sameAs }),
+};
+
+const allSchema = [orgSchema, ...schema];
+---
+
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#1F3D33" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/brand/nextmarg-app-icon-forest.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+
+    <!-- Google Consent Mode v2: analytics stays off until the visitor accepts -->
+    <script is:inline define:vars={{ gtmId: site.gtmId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag;
+      var choice = null;
+      try { choice = localStorage.getItem('nm-consent'); } catch (e) {}
+      gtag('consent', 'default', {
+        ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+        analytics_storage: choice === 'granted' ? 'granted' : 'denied',
+        wait_for_update: 500,
+      });
+      if (gtmId) {
+        (function (w, d, s, l, i) {
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0], j = d.createElement(s);
+          j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', gtmId);
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <a class="wa-float" href={whatsappLink} target="_blank" rel="noopener" aria-label="Chat with Nextmarg on WhatsApp" data-track="whatsapp_click">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+    </a>
+
+    <div class="consent-banner" id="consent" hidden role="dialog" aria-live="polite" aria-label="Cookie choices">
+      <p style="margin:0">We use analytics cookies to see which pages help visitors, and only after you agree. Read our <a href="/privacy">privacy notice</a>.</p>
+      <div class="actions">
+        <button class="btn btn--sand" type="button" data-consent="granted">Accept analytics</button>
+        <button class="btn btn--light" type="button" data-consent="denied">Only essential</button>
+      </div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var banner = document.getElementById('consent');
+        var choice = null;
+        try { choice = localStorage.getItem('nm-consent'); } catch (e) {}
+        if (!choice) banner.hidden = false;
+        banner.addEventListener('click', function (e) {
+          var v = e.target.getAttribute && e.target.getAttribute('data-consent');
+          if (!v) return;
+          try { localStorage.setItem('nm-consent', v); } catch (err) {}
+          window.gtag('consent', 'update', { analytics_storage: v });
+          banner.hidden = true;
+        });
+        // Conversion events for GTM: WhatsApp, phone, email and booking clicks
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href]');
+          if (!a) return;
+          var href = a.getAttribute('href');
+          var ev = a.getAttribute('data-track') ||
+            (href.indexOf('wa.me') > -1 ? 'whatsapp_click' :
+             href.indexOf('tel:') === 0 ? 'phone_click' :
+             href.indexOf('mailto:') === 0 ? 'email_click' : null);
+          if (ev) window.dataLayer.push({ event: ev, link_url: href, page_path: location.pathname });
+        });
+      })();
+    </script>
+  </body>
+</html>
