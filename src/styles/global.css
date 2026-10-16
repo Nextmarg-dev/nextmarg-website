@@ -651,16 +651,17 @@ td.price {
   align-items: center;
 }
 .founder-photo {
-  aspect-ratio: 1;
+  display: block;
   max-width: 320px;
   border-radius: 24px;
+  overflow: hidden;
   background: var(--forest);
-  display: grid;
-  place-items: center;
-  color: var(--sand);
-  font-weight: 700;
-  font-size: 64px;
-  letter-spacing: -0.03em;
+}
+.founder-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 @media (min-width: 860px) {
   .founder {

@@ -47,6 +47,7 @@ const orgSchema = {
     '@id': `${site.url}/about#founder`,
     name: site.founder,
     jobTitle: 'Founder',
+    image: `${site.url}/brand/preetham-ram.jpg`,
     ...(site.linkedinFounder && { sameAs: [site.linkedinFounder] }),
   },
   knowsAbout: [
