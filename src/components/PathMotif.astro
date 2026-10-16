@@ -1,0 +1,10 @@
+---
+// The brand path motif: one continuous stroke ending short of the clay dot.
+interface Props { class?: string }
+const { class: cls = 'hero-path' } = Astro.props;
+---
+
+<svg class={cls} viewBox="0 0 520 420" fill="none" aria-hidden="true">
+  <path d="M20 400 C 120 400, 120 220, 220 220 S 330 340, 400 230 S 440 120, 440 120" stroke="#1F3D33" stroke-width="18" stroke-linecap="round" opacity="0.18" />
+  <circle cx="470" cy="70" r="22" fill="#B9603F" />
+</svg>

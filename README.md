@@ -32,7 +32,6 @@ Every push to `main` then deploys automatically.
 
 ## Before launch
 
-- [ ] `src/data/site.ts`: add the Web3Forms key (until then, forms send the enquiry through WhatsApp), the GTM container ID, LinkedIn and Google Business Profile links, and optionally the street address and booking link
-- [ ] Replace the "PR" placeholder with a real founder photo (Home and About)
+- [ ] `src/data/site.ts`: add the GTM container ID, LinkedIn and Google Business Profile links, and optionally the street address and booking link
 - [ ] Check every number on the Work page and the starting prices
 - [ ] Submit `https://nextmarg.com/sitemap-index.xml` in Google Search Console and Bing Webmaster Tools

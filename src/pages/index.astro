@@ -1,0 +1,196 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import PathMotif from '../components/PathMotif.astro';
+import { site, whatsappLink } from '../data/site';
+import { groups, growthPartner } from '../data/services';
+import { pillars, promise, steps, homeFaqs } from '../data/content';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  name: site.name,
+  url: site.url,
+  publisher: { '@id': `${site.url}/#org` },
+};
+---
+
+<Base
+  title="Digital agency in Bengaluru"
+  description="Nextmarg is a founder-led digital agency in Bengaluru. Websites, SEO and AI search, ads, CRM and analytics for growing businesses, measured on enquiries, not likes."
+  schema={[webSiteSchema, faqSchema]}
+>
+  <section class="hero">
+    <PathMotif />
+    <div class="wrap">
+      <span class="kicker">Digital agency · Bengaluru</span>
+      <h1 class="display">{site.headline}</h1>
+      <p class="sub">{site.subline}</p>
+      <p class="lead">
+        Websites, Google and AI search, ads, CRM and tracking for growing businesses, planned and delivered by a founder who has run digital
+        programs for global brands.
+      </p>
+      <div class="actions">
+        <a class="btn" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>Get your free Digital Health Score</a>
+        <a class="btn btn--ghost" href={whatsappLink} target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight" style="border-bottom:1px solid var(--line)">
+    <div class="wrap proof">
+      <span>15+ years delivering digital for</span>
+      <strong>VMware</strong><strong>Wipro</strong><strong>ITC</strong><strong>Quest Global</strong>
+      <a href="/work" class="accent" style="font-weight:600">See the track record</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Why businesses switch agencies</span>
+        <h2>Most agencies report likes. Owners want enquiries.</h2>
+        <p class="lead">
+          Small businesses that leave their agency usually say the same thing: they couldn't see a return. Nextmarg is built around fixing that.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card card--linen">
+          <div class="stat">40%</div>
+          <p>of small businesses that outsource marketing drop or switch their agency.</p>
+        </div>
+        <div class="card card--linen">
+          <div class="stat">56%</div>
+          <p>of those exits happen within the first 6 to 12 months.</p>
+        </div>
+        <div class="card card--linen">
+          <div class="stat">60%</div>
+          <p>of those who left gave "no return on investment" as the reason.</p>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top:16px">
+        Source: <a href="https://www.vcita.com/press/smb-survey-highlights-marketing-agency-churn" rel="noopener">vcita small business survey</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What makes us different</span>
+        <h2>Five promises behind every project</h2>
+      </div>
+      <div class="grid grid--3">
+        {pillars.map((p, i) => (
+          <div class="card">
+            <span class="num">0{i + 1}</span>
+            <h3>{p.title}</h3>
+            <p class="muted">{p.text}</p>
+          </div>
+        ))}
+        <a class="card" href="/digital-health-score" style="background:var(--forest);color:var(--linen);border-color:var(--forest)">
+          <span class="num" style="color:var(--sand)">Start here</span>
+          <h3>Free Digital Health Score</h3>
+          <p style="color:rgba(246,242,234,.85)">A 30-point check of where you stand today, with your top five fixes.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What we do</span>
+        <h2>Start from your problem. We'll find the path.</h2>
+        <p class="lead">Our services are grouped by what you want to achieve, not by channel. Find the line that sounds like you.</p>
+      </div>
+      <div class="grid grid--4">
+        {groups.map((g) => (
+          <a class="card" href={`/services#${g.id}`}>
+            <span class="num">{g.num}</span>
+            <h3>{g.title}</h3>
+            <p class="quote">"{g.problem}"</p>
+          </a>
+        ))}
+        <a class="card card--sage" href="/services#growth-partner">
+          <span class="num">+</span>
+          <h3>{growthPartner.title}</h3>
+          <p class="quote">"{growthPartner.problem}"</p>
+        </a>
+      </div>
+      <div class="actions"><a class="btn btn--ghost" href="/services">See all services and prices</a></div>
+    </div>
+  </section>
+
+  <section class="section section--forest">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">How we work</span>
+        <h2>One clear path, step by step</h2>
+      </div>
+      <div class="grid grid--4">
+        {steps.map((s, i) => (
+          <div class="card">
+            <span class="num">0{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">The Nextmarg promise</span>
+        <h2>What you can hold us to</h2>
+      </div>
+      <div class="grid grid--3">
+        {promise.map((p) => (
+          <div class="card card--linen" style="background:var(--white)">
+            <h3>{p.title}</h3>
+            <p class="muted">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap founder">
+      <picture class="founder-photo">
+        <source srcset="/brand/preetham-ram.webp" type="image/webp" />
+        <img src="/brand/preetham-ram.jpg" alt="Preetham Ram, founder of Nextmarg" width="640" height="640" loading="lazy" />
+      </picture>
+      <div>
+        <span class="kicker">Founder-led</span>
+        <h2>You work with {site.founder}, not a junior</h2>
+        <p class="lead">
+          Preetham is a digital program manager with 15+ years of experience delivering web, performance marketing, SEO and social media
+          programs for global brands and fast-growing companies. He started Nextmarg to bring that standard of work to growing businesses.
+        </p>
+        <div class="actions"><a class="btn btn--ghost" href="/about">More about Nextmarg</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Questions</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <Faq items={homeFaqs} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

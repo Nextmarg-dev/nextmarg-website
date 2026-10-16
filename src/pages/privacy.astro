@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const updated = '16 October 2026';
+---
+
+<Base
+  title="Privacy notice"
+  description="How Nextmarg collects, uses and protects personal data from this website, in line with India's Digital Personal Data Protection Act, 2023."
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Privacy notice</span>
+      <h1 class="display">How we handle your data</h1>
+      <p class="lead">Last updated {updated}. Written in plain language, in line with India's Digital Personal Data Protection Act, 2023.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>Who we are</h2>
+      <p>
+        Nextmarg ("we", "us") is a digital agency based in {site.city}, India, run by {site.founder}. We decide how the personal data collected
+        on nextmarg.com is used. You can reach us at <a href={`mailto:${site.email}`}>{site.email}</a> or {site.phone}.
+      </p>
+
+      <h2>What we collect, and why</h2>
+      <ul>
+        <li><strong>Enquiry and Digital Health Score forms:</strong> your name, business name, email or WhatsApp number, website and message. We use these only to reply to you and to prepare what you asked for.</li>
+        <li><strong>WhatsApp, phone and email:</strong> the details you share when you contact us, used to answer you.</li>
+        <li><strong>Analytics (only if you accept):</strong> pages visited, device type, approximate location and how you arrived, collected through Google Analytics and Microsoft Clarity. We use this to improve the website. It is not used to identify you.</li>
+      </ul>
+      <p>We do not sell your data, and we do not use it for anything you have not agreed to.</p>
+
+      <h2>Your consent</h2>
+      <p>
+        We ask for your consent on each form and before any analytics cookies are set. You can withdraw consent at any time by emailing us, or
+        by clearing this site's cookies and choosing "Only essential" on the banner. Withdrawing consent does not affect anything done before.
+      </p>
+
+      <h2>Who we share it with</h2>
+      <p>
+        We use trusted service providers to run the site and our business: our form service, email provider, CRM (Zoho), Google Analytics and
+        Microsoft Clarity, and Cloudflare for hosting. They process data on our instructions. Some may store data outside India, with
+        safeguards in place.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <p>
+        We keep enquiry details for up to 24 months after our last contact, unless you become a client, in which case we keep what our contract
+        and the law require. Analytics data is kept for 14 months.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>You can ask us to:</p>
+      <ul>
+        <li>tell you what personal data we hold about you and how we use it</li>
+        <li>correct, complete or update it</li>
+        <li>delete it, unless the law requires us to keep it</li>
+        <li>nominate someone to act for you</li>
+      </ul>
+      <p>
+        Email <a href={`mailto:${site.email}`}>{site.email}</a> with the subject "Privacy request". We will reply within 30 days. If you are not
+        satisfied, you can complain to the Data Protection Board of India.
+      </p>
+
+      <h2>Security</h2>
+      <p>The site runs over HTTPS. We limit access to your data to the people who need it and use providers with strong security practices.</p>
+
+      <h2>Changes</h2>
+      <p>If we change this notice, we will update the date at the top of this page.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site, whatsappLink } from '../data/site';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Nextmarg',
+    url: `${site.url}/contact`,
+    about: { '@id': `${site.url}/#org` },
+  },
+];
+const mapQuery = encodeURIComponent(site.streetAddress ? `${site.streetAddress}, ${site.city}` : `${site.city}, ${site.region}`);
+---
+
+<Base
+  title="Contact"
+  description="Talk to Nextmarg, a digital agency in Bengaluru. WhatsApp, call or email hello@nextmarg.com, or book a free Digital Health Score."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Contact</span>
+      <h1 class="display">Ready for your next step?</h1>
+      <p class="lead">Tell us a little about your business. We reply on WhatsApp or email within one working day.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid--2" style="gap:48px;align-items:start">
+      <div class="card">
+        <h2 class="h3" style="font-size:22px;line-height:28px">Send us a message</h2>
+        <ContactForm subject="New enquiry from nextmarg.com" button="Send message" />
+      </div>
+      <div>
+        <div class="grid" style="gap:16px">
+          <a class="card" href={whatsappLink} target="_blank" rel="noopener">
+            <span class="num">Fastest</span>
+            <h3>WhatsApp</h3>
+            <p class="muted">{site.phone}</p>
+          </a>
+          <a class="card" href={`tel:${site.phoneHref}`}>
+            <span class="num">Call</span>
+            <h3>Phone</h3>
+            <p class="muted">{site.phone} · {site.hours}</p>
+          </a>
+          <a class="card" href={`mailto:${site.email}`}>
+            <span class="num">Email</span>
+            <h3>{site.email}</h3>
+            <p class="muted">For proposals, partnerships and white-label work.</p>
+          </a>
+          {site.bookingUrl && (
+            <a class="card card--sage" href={site.bookingUrl} rel="noopener" data-track="booking_click">
+              <span class="num">Book</span>
+              <h3>Book a free 30-minute call</h3>
+              <p class="muted">Pick a time that suits you.</p>
+            </a>
+          )}
+          <div class="card card--linen">
+            <span class="num">Where we are</span>
+            <h3>{site.city}, {site.region}, India</h3>
+            <p class="muted">We work with clients across India and abroad over video calls and WhatsApp.</p>
+            <iframe
+              title="Nextmarg location on Google Maps"
+              src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+              width="100%"
+              height="220"
+              style="border:0;border-radius:12px;margin-top:8px"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
