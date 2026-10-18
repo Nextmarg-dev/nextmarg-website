@@ -5,9 +5,9 @@ import Faq from '../components/Faq.astro';
 import { site, whatsappLink } from '../data/site';
 
 const areas = [
-  { name: 'Google search', points: 6, checks: 'Rankings for your main services, page titles, speed, mobile use, indexing errors and schema.' },
+  { name: 'Google search', points: 6, checks: 'Rankings for your main services, page titles, Core Web Vitals on mobile, indexing errors and schema, checked against Google Search Essentials.' },
   { name: 'AI search', points: 5, checks: 'Whether ChatGPT, Gemini, Perplexity and Google AI Overviews mention you for 10 real customer questions.' },
-  { name: 'Website', points: 6, checks: 'Clear service pages, calls to action, forms, WhatsApp, trust signals and load time on a phone.' },
+  { name: 'Website', points: 6, checks: 'Clear service pages, calls to action, forms, WhatsApp, trust signals and basic accessibility (WCAG 2.2) on a phone.' },
   { name: 'Tracking', points: 5, checks: 'GA4 and Tag Manager setup, conversion events, lead source tracking and a usable report.' },
   { name: 'Reviews and local', points: 5, checks: 'Google Business Profile completeness, review count and replies, and matching directory listings.' },
   { name: 'Privacy readiness', points: 3, checks: 'Consent banner, lead form consent and a privacy notice, ahead of the DPDP Act deadline.' },
@@ -85,6 +85,7 @@ const schema = [
       <div class="section-head">
         <span class="kicker">What we check</span>
         <h2>30 points in six areas</h2>
+        <p class="lead">Each point is a yes-or-no check, so your score is simply the number you pass. Where a public standard exists, we use it: Google's own guidance for search and speed, WCAG 2.2 for accessibility and India's DPDP Act for privacy.</p>
       </div>
       <div class="grid grid--3">
         {areas.map((a) => (
@@ -108,7 +109,7 @@ const schema = [
         </p>
         <p class="small muted">The scorecard on this page is an illustration, not a real client's results.</p>
       </div>
-      <div class="scorecard" aria-label="Sample scorecard">
+      <div class="scorecard" role="group" aria-label="Sample scorecard, 14 out of 30">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
           <strong>Sample business</strong>
           <span class="stat" style="font-size:40px;margin:0">14<span class="muted" style="font-size:20px">/30</span></span>
