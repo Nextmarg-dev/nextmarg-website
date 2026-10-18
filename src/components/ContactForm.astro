@@ -10,7 +10,7 @@ const id = healthScore ? 'health-score-form' : 'contact-form';
   <input type="hidden" name="subject" value={subject} />
   <input type="hidden" name="from_name" value="nextmarg.com" />
   <input type="hidden" name="redirect" value={`${site.url}/thank-you`} />
-  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+  <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Leave this unticked" />
   <input type="hidden" name="source_page" value="" />
   <input type="hidden" name="utm" value="" />
 
@@ -35,7 +35,8 @@ const id = healthScore ? 'health-score-form' : 'contact-form';
   )}
   <div class="field">
     <label for={`${id}-phone`}>WhatsApp number</label>
-    <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91" required />
+    <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" pattern="\+?[0-9][0-9 \-]{8,18}" title="Enter your number with country code, like +91 98765 43210" aria-describedby={`${id}-phone-hint`} required />
+    <p class="small muted" id={`${id}-phone-hint`} style="margin:6px 0 0">With country code, like +91 98765 43210.</p>
   </div>
   {!healthScore && (
     <div class="field">
