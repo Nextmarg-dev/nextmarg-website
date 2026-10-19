@@ -150,7 +150,13 @@ const allSchema = [orgSchema, ...schema];
           if (!v) return;
           try { localStorage.setItem('nm-consent', v); } catch (err) {}
           window.gtag('consent', 'update', { analytics_storage: v });
+          // Lets consent-gated tags in GTM (such as Clarity) start on this page, not only the next one
+          window.dataLayer.push({ event: 'consent_update', analytics_consent: v });
           banner.hidden = true;
+        });
+        // "Cookie settings" in the footer reopens the banner so visitors can change their choice
+        document.addEventListener('click', function (e) {
+          if (e.target.closest && e.target.closest('[data-open-consent]')) banner.hidden = false;
         });
         // Conversion events for GTM: WhatsApp, phone, email and booking clicks
         document.addEventListener('click', function (e) {

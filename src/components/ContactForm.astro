@@ -63,8 +63,13 @@ const id = healthScore ? 'health-score-form' : 'contact-form';
       f.utm.value = utm || sessionStorage.getItem('nm-utm') || '';
     } catch (e) { f.utm.value = utm; }
     f.addEventListener('submit', function (e) {
-      window.dataLayer && window.dataLayer.push({ event: 'generate_lead', form_name: f.getAttribute('data-form-name') });
-      if (hasKey) return;
+      var formName = f.getAttribute('data-form-name');
+      if (hasKey) {
+        // The lead is counted on /thank-you, once Web3Forms has actually accepted it
+        try { sessionStorage.setItem('nm-lead', formName); } catch (err) {}
+        return;
+      }
+      window.dataLayer && window.dataLayer.push({ event: 'generate_lead', form_name: formName, lead_method: 'whatsapp' });
       // No form service key yet: send the enquiry through WhatsApp instead.
       e.preventDefault();
       var lines = [f.subject.value];
