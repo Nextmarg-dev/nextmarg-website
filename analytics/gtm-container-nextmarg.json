@@ -50,7 +50,8 @@
           }
         ],
         "firingTriggerId": [
-          "2147479573"
+          "2147479573",
+          "22"
         ],
         "tagFiringOption": "ONCE_PER_EVENT",
         "consentSettings": {
@@ -267,7 +268,7 @@
         "accountId": "0",
         "containerId": "0",
         "triggerId": "22",
-        "name": "CE - consent_update",
+        "name": "CE - consent_update (granted)",
         "type": "CUSTOM_EVENT",
         "customEventFilter": [
           {
@@ -282,6 +283,23 @@
                 "type": "TEMPLATE",
                 "key": "arg1",
                 "value": "consent_update"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DLV - analytics_consent}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "granted"
               }
             ]
           }
