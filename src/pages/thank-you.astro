@@ -17,6 +17,11 @@ import { whatsappLink } from '../data/site';
   </section>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'lead_thank_you' });
+    // Count a lead only when a form sent the visitor here, and only once (a refresh or a bookmark doesn't count)
+    (function () {
+      var formName = null;
+      try { formName = sessionStorage.getItem('nm-lead'); sessionStorage.removeItem('nm-lead'); } catch (e) {}
+      if (formName) window.dataLayer.push({ event: 'generate_lead', form_name: formName, lead_method: 'form' });
+    })();
   </script>
 </Base>
