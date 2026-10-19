@@ -14,4 +14,6 @@ Google Tag Manager loads on every page, with Google Consent Mode v2 defaults set
 | `email_click` | Any `mailto:` link | `link_url`, `page_path` |
 | `consent_update` | The visitor picks a banner option | `analytics_consent` (`granted` / `denied`) |
 
+The GA4 Google tag also fires on `consent_update` when consent is granted. The landing page's first hit goes out before consent (cookieless, not shown in reports), so re-firing it then records the page view, session and traffic source for that visitor.
+
 Mark `generate_lead`, `whatsapp_click`, `phone_click` and `email_click` as key events in GA4.
