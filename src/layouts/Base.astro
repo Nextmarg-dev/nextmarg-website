@@ -41,7 +41,12 @@ const orgSchema = {
     addressRegion: site.region,
     addressCountry: site.country,
   },
-  areaServed: [{ '@type': 'City', name: 'Bengaluru' }, { '@type': 'Country', name: 'India' }],
+  areaServed: [
+    { '@type': 'City', name: 'Bengaluru' },
+    { '@type': 'City', name: 'Tumakuru' },
+    { '@type': 'City', name: 'Mysuru' },
+    { '@type': 'Country', name: 'India' },
+  ],
   founder: {
     '@type': 'Person',
     '@id': `${site.url}/about#founder`,
