@@ -26,7 +26,7 @@ export const site = {
   linkedinFounder: '',
   instagram: '',
   x: '',
-  googleBusinessProfile: '',
+  googleBusinessProfile: 'https://g.page/r/CTOUfwWm807WEBM',
   // Google Tag Manager container ID, e.g. "GTM-ABC1234". Leave empty until it exists.
   gtmId: 'GTM-K3K3CTRM',
   // Web3Forms access key (free at web3forms.com). Forms send to hello@nextmarg.com once set.
