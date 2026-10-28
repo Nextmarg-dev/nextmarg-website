@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from './Faq.astro';
+import PathMotif from './PathMotif.astro';
+import { site } from '../data/site';
+import { homeAlternates, type LangPage } from '../data/languages';
+
+interface Props { page: LangPage }
+const { page } = Astro.props;
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(page.whatsappText)}`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    url: `${site.url}${page.path}`,
+    inLanguage: page.lang,
+    about: { '@id': `${site.url}/#org` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: page.lang,
+    mainEntity: page.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title={page.title}
+  fullTitle={page.title}
+  description={page.description}
+  lang={page.lang}
+  ogLocale={page.ogLocale}
+  alternates={homeAlternates}
+  crumbName={page.langName}
+  schema={schema}
+>
+  <section class="hero">
+    <PathMotif />
+    <div class="wrap">
+      <span class="kicker">{page.kicker}</span>
+      <h1 class="display">{page.h1}</h1>
+      <p class="sub">{page.sub}</p>
+      <p class="lead">{page.lead}</p>
+      <div class="actions">
+        <a class="btn" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>{page.ctaScore}</a>
+        <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">{page.ctaWhatsapp}</a>
+      </div>
+      <p class="small" style="margin-top:20px"><a href="/" lang="en" hreflang="en-IN">{page.englishLink}</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>{page.servicesTitle}</h2></div>
+      <div class="grid grid--3">
+        {page.services.map((s) => (
+          <div class="card">
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head"><h2>{page.whyTitle}</h2></div>
+      <div class="grid grid--3">
+        {page.why.map((w, i) => (
+          <div class="card">
+            <span class="num">0{i + 1}</span>
+            <h3>{w.title}</h3>
+            <p class="muted">{w.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>{page.faqTitle}</h2></div>
+      <Faq items={page.faqs} />
+    </div>
+  </section>
+
+  <section class="section section--forest">
+    <div class="wrap cta-band">
+      <div>
+        <h2>{page.scoreTitle}</h2>
+        <p class="lead" style="margin:0">{page.scoreText}</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn--sand" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>{page.ctaScore}</a>
+        <a class="btn btn--light" href={waLink} target="_blank" rel="noopener">{page.ctaWhatsapp}</a>
+      </div>
+    </div>
+  </section>
+</Base>

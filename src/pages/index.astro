@@ -6,6 +6,7 @@ import PathMotif from '../components/PathMotif.astro';
 import { site, whatsappLink } from '../data/site';
 import { groups, growthPartner } from '../data/services';
 import { pillars, promise, steps, homeFaqs } from '../data/content';
+import { homeAlternates } from '../data/languages';
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -25,6 +26,7 @@ const webSiteSchema = {
 <Base
   title="Digital agency in Bengaluru"
   fullTitle="Nextmarg | Digital marketing agency in Bengaluru"
+  alternates={homeAlternates}
   description="Nextmarg is a founder-led digital agency in Bengaluru. Websites, SEO and AI search, ads, CRM and analytics for growing businesses, measured on enquiries, not likes."
   schema={[webSiteSchema, faqSchema]}
 >
