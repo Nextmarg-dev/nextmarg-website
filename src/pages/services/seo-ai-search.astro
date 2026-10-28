@@ -1,0 +1,271 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { site, whatsappLink } from '../../data/site';
+import { offers } from '../../data/services';
+
+const terms = [
+  { name: 'SEO', long: 'Search Engine Optimisation', text: "Ranking your website in Google's normal blue-link results for the searches your customers make." },
+  { name: 'AEO', long: 'Answer Engine Optimisation', text: 'Writing your pages so Google, voice assistants and "People also ask" lift your answer word for word.' },
+  { name: 'GEO', long: 'Generative Engine Optimisation', text: 'Getting your business named and recommended when people ask ChatGPT, Gemini, Perplexity, Copilot or Claude.' },
+  { name: 'AIO', long: 'AI Overviews Optimisation', text: 'Getting your pages cited as a source in the AI summary at the top of Google, and in Google AI Mode.' },
+];
+
+const steps = [
+  {
+    title: 'Audit',
+    text: 'We test 20 real customer questions in ChatGPT, Gemini, Perplexity, Copilot and Google, and record who gets named. We also check your site, schema, Google Business Profile and listings.',
+  },
+  {
+    title: 'Fix the foundations',
+    text: 'Speed and indexing errors, schema markup, crawler access for AI tools, llms.txt, and one consistent name, address and phone number everywhere.',
+  },
+  {
+    title: 'Publish answers',
+    text: 'A clear page for each service and area, FAQs written answer-first, and guides that answer the questions buyers actually ask, in English and your regional language.',
+  },
+  {
+    title: 'Earn mentions',
+    text: 'Reviews, directory and industry listings, and mentions on sites that AI tools read and trust. AI answers lean heavily on what others say about you.',
+  },
+  {
+    title: 'Track and report',
+    text: 'A monthly report in plain language: Google rankings, AI mentions out of 20 test questions, competitors, and the enquiries that came from search.',
+  },
+];
+
+const included = [
+  'Technical SEO: speed, mobile, indexing, sitemaps and Search Console',
+  'Schema markup for your business, services, FAQs, reviews and articles',
+  'AI crawler access (robots.txt, Cloudflare settings) and an llms.txt summary',
+  'Service and area pages, and answer-first FAQs',
+  'Google Business Profile, reviews and directory listings (Justdial, Practo, IndiaMART and others)',
+  'Bing Webmaster Tools, which also feeds ChatGPT search and Copilot',
+  'Monthly AI visibility tracking against three competitors',
+];
+
+const languages = [
+  { lang: 'Kannada', example: '"ಇಂದಿರಾನಗರದಲ್ಲಿ ಒಳ್ಳೆ ಡೆಂಟಿಸ್ಟ್" spoken into Google brings up your Kannada page.' },
+  { lang: 'Hindi', example: '"बेंगलुरु में अच्छा फिजियोथेरेपिस्ट" brings up your Hindi page and your Google listing.' },
+  { lang: 'Tamil and Telugu', example: 'Pages for customers in Hosur, Chennai and Hyderabad, and for Tamil and Telugu speakers in Bengaluru.' },
+];
+
+const faqs = [
+  {
+    q: 'What is the difference between SEO, AEO, GEO and AIO?',
+    a: "SEO ranks you in Google's normal results. AEO gets your answer picked for answer boxes and voice assistants. GEO gets you named by AI chatbots like ChatGPT, Gemini and Perplexity. AIO gets you cited in Google's AI Overviews. They share the same foundations: a fast, clear website, structured data, and other trusted sites that mention you.",
+  },
+  {
+    q: 'Can you guarantee that ChatGPT or Google will recommend my business?',
+    a: 'No, and nobody honestly can. AI answers change from one question to the next. We promise the work and the tracking: you see every month how often you are named in 20 test questions, and how that compares with your competitors.',
+  },
+  {
+    q: 'How long do SEO and AI search take to work?',
+    a: 'Technical fixes and Google Business Profile changes often show within 4 to 8 weeks. Rankings for competitive searches and regular AI mentions usually take 3 to 6 months of steady work.',
+  },
+  {
+    q: 'How much do SEO and AI search services cost in Bengaluru?',
+    a: `Our AI Search Ready audit starts ${offers.find((o) => o.name === 'AI Search Ready audit')?.price.toLowerCase()} as a one-time project, and the Local Profile Plan for Google Business Profile starts ${offers.find((o) => o.name === 'Local Profile Plan')?.price.toLowerCase()} a month. Monthly SEO and AI search plans are quoted after the audit, with 30 days' notice and no lock-in.`,
+  },
+  {
+    q: 'Do I need a new website for AI search?',
+    a: 'Usually not. Most sites need clearer service pages, FAQs, schema and faster loading, which we add to what you have. We suggest a rebuild only when the current site cannot be fixed for less.',
+  },
+  {
+    q: 'Do you do SEO in Kannada and Hindi?',
+    a: 'Yes. We write Kannada and Hindi pages with a native speaker checking every page, mark them up so Google shows the right language to the right person, and phrase them the way people speak into their phones.',
+  },
+  {
+    q: 'How do you measure AI visibility?',
+    a: 'We agree 20 questions your customers really ask, such as "best physiotherapist in HSR Layout". Every month we ask them in ChatGPT, Gemini, Perplexity, Copilot and Google, and count how often you and three competitors are named or linked.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${site.url}/services/seo-ai-search#service`,
+    name: 'SEO and AI search optimisation (SEO, AEO, GEO, AIO)',
+    serviceType: 'Search engine optimisation',
+    description:
+      'SEO for Google plus AEO, GEO and AIO so ChatGPT, Gemini, Perplexity and Google AI Overviews name your business, with regional-language SEO in Kannada and Hindi and monthly AI visibility tracking.',
+    provider: { '@id': `${site.url}/#org` },
+    areaServed: [
+      { '@type': 'City', name: 'Bengaluru' },
+      { '@type': 'Country', name: 'India' },
+    ],
+    availableLanguage: ['English', 'Kannada', 'Hindi'],
+    offers: {
+      '@type': 'Offer',
+      name: 'AI Search Ready audit',
+      priceCurrency: 'INR',
+      priceSpecification: { '@type': 'PriceSpecification', minPrice: '15000', priceCurrency: 'INR' },
+      seller: { '@id': `${site.url}/#org` },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title="SEO and AI search services in Bengaluru"
+  fullTitle="SEO, AEO and GEO services in Bengaluru | Nextmarg"
+  description="Get found on Google, ChatGPT, Gemini and Google AI Overviews. SEO, AEO, GEO and AIO, plus Kannada and Hindi SEO, from a founder-led Bengaluru agency. Audit from ₹15,000."
+  crumbs={[{ name: 'Services', path: '/services' }]}
+  crumbName="SEO and AI search"
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Services · Get found</span>
+      <h1 class="display" style="max-width:900px">SEO and AI search for growing businesses in Bengaluru</h1>
+      <p class="lead">
+        Your customers now ask Google, ChatGPT and Gemini before they call anyone. Nextmarg makes sure your business is the one they find,
+        and the one the AI names. We cover SEO, AEO, GEO and AIO, in English, Kannada and Hindi, and we track every month how often you show up.
+      </p>
+      <div class="actions">
+        <a class="btn" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>Check my AI visibility for free</a>
+        <a class="btn btn--ghost" href={whatsappLink} target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">In one line each</span>
+        <h2>SEO, AEO, GEO and AIO, explained</h2>
+        <p class="lead">Four names for one goal: when someone asks about what you sell, your business is in the answer.</p>
+      </div>
+      <div class="grid grid--4">
+        {terms.map((t) => (
+          <div class="card">
+            <span class="num">{t.long}</span>
+            <h3>{t.name}</h3>
+            <p class="muted">{t.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top:16px">
+        Want the long version? Read our guide:
+        <a href="/guides/get-recommended-by-chatgpt">how to get your business recommended by ChatGPT and Google's AI</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap grid grid--2" style="gap:48px;align-items:start">
+      <div>
+        <span class="kicker">Why now</span>
+        <h2>Ranking first is no longer enough</h2>
+        <p class="lead">
+          Google's AI summary now answers many questions before anyone clicks. For informational searches, Ahrefs found the top result lost 58% of its
+          clicks between 2023 and 2025. The businesses named inside the answer get the attention.
+        </p>
+        <p>
+          India is also searching in its own languages. 98% of Indian internet users use content in Indian languages, and 57% of urban users
+          prefer it, according to IAMAI and Kantar. Few local businesses have a single page in Kannada or Hindi, so the field is open.
+        </p>
+        <p class="small muted">
+          Sources: <a href="https://www.medianama.com/2026/02/223-google-ai-overviews-click-through-rates-58-study/" rel="noopener">Ahrefs study via MediaNama</a>,
+          <a href="https://www.theweek.in/wire-updates/business/2025/01/16/dcm51-biz-iamai-internet-usage-report.html" rel="noopener">IAMAI-Kantar Internet in India report</a>.
+        </p>
+      </div>
+      <div class="card">
+        <h3>What's included</h3>
+        <ul class="ticks">
+          {included.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">How we work</span>
+        <h2>Five steps, reported every month</h2>
+      </div>
+      <div class="grid grid--3">
+        {steps.map((s, i) => (
+          <div class="card card--linen">
+            <span class="num">0{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.text}</p>
+          </div>
+        ))}
+        <div class="card" style="background:var(--forest);color:var(--linen);border-color:var(--forest)">
+          <span class="num" style="color:var(--sand)">Example report line</span>
+          <h3>"Named in 4 of 20 questions this month, up from 1."</h3>
+          <p style="color:rgba(246,242,234,.85)">Plus which competitor was named instead, and what we'll do about it next month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage" id="regional-language-seo">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Regional-language SEO</span>
+        <h2>Be found in Kannada and Hindi, not just English</h2>
+        <p class="lead">
+          We write pages in your customers' language, have a native speaker check every one, and set them up so Google shows each person the
+          right language. Voice searches in Indian languages are usually spoken, not typed, so we write the way people talk.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {languages.map((l) => (
+          <div class="card">
+            <h3>{l.lang}</h3>
+            <p class="muted">{l.example}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Prices</span>
+        <h2>Start with an audit, then a monthly plan</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="num">Free</span>
+          <h3>Digital Health Score</h3>
+          <p class="muted">A 30-point check that includes 5 AI search points: do ChatGPT, Gemini, Perplexity and Google's AI mention you today?</p>
+          <a class="accent" style="font-weight:600" href="/digital-health-score">Get my free score</a>
+        </div>
+        <div class="card">
+          <span class="num">From ₹15,000 · one-time</span>
+          <h3>AI Search Ready audit</h3>
+          <p class="muted">20 customer questions tested across five AI tools and Google, a technical SEO check, and a prioritised fix list.</p>
+        </div>
+        <div class="card">
+          <span class="num">Quoted after the audit · monthly</span>
+          <h3>SEO and AI search plan</h3>
+          <p class="muted">The fixes, new pages, listings and reviews, and a monthly AI visibility report. 30 days' notice, no lock-in.</p>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top:16px">
+        We promise the work and the tracking. Nobody can guarantee a place in AI answers, and we won't pretend to.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions about SEO and AI search</h2></div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <CtaBand title="Does ChatGPT recommend you, or your competitor?" />
+</Base>

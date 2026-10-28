@@ -24,6 +24,7 @@ const webSiteSchema = {
 
 <Base
   title="Digital agency in Bengaluru"
+  fullTitle="Nextmarg | Digital marketing agency in Bengaluru"
   description="Nextmarg is a founder-led digital agency in Bengaluru. Websites, SEO and AI search, ads, CRM and analytics for growing businesses, measured on enquiries, not likes."
   schema={[webSiteSchema, faqSchema]}
 >
@@ -113,7 +114,7 @@ const webSiteSchema = {
       </div>
       <div class="grid grid--4">
         {groups.map((g) => (
-          <a class="card" href={`/services#${g.id}`}>
+          <a class="card" href={g.id === 'get-found' ? '/services/seo-ai-search' : `/services#${g.id}`}>
             <span class="num">{g.num}</span>
             <h3>{g.title}</h3>
             <p class="quote">"{g.problem}"</p>

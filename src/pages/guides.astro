@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { guides } from '../data/guides';
+
+const dateLabel = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Nextmarg guides',
+    url: `${site.url}/guides`,
+    publisher: { '@id': `${site.url}/#org` },
+    hasPart: guides.map((g) => ({ '@type': 'Article', headline: g.title, url: `${site.url}/guides/${g.slug}` })),
+  },
+];
+---
+
+<Base
+  title="Guides"
+  fullTitle="Guides on SEO, AI search and digital marketing | Nextmarg"
+  description="Plain-language guides for growing businesses in India on getting found on Google and in AI answers, websites, tracking and leads."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Guides</span>
+      <h1 class="display" style="max-width:860px">Plain-language guides for growing businesses</h1>
+      <p class="lead">Practical steps you can take yourself, written by {site.founder} from 15+ years of running digital programs.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid--2">
+      {guides.map((g) => (
+        <a class="card" href={`/guides/${g.slug}`}>
+          <span class="num">{dateLabel(g.published)}</span>
+          <h2 class="h3">{g.title}</h2>
+          <p class="muted">{g.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

@@ -10,13 +10,19 @@ interface Props {
   description: string;
   schema?: Record<string, unknown>[];
   noindex?: boolean;
+  // Full <title> text when the default "Title | Nextmarg" pattern doesn't fit
+  fullTitle?: string;
+  // Breadcrumb trail between Home and this page, e.g. [{ name: 'Services', path: '/services' }]
+  crumbs?: { name: string; path: string }[];
+  // Short page name for the last breadcrumb. Defaults to the title.
+  crumbName?: string;
 }
 
-const { title, description, schema = [], noindex = false } = Astro.props;
+const { title, description, schema = [], noindex = false, crumbs = [], crumbName = title } = Astro.props;
 const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), site.url).href;
 const ogImage = new URL('/og-image.png', site.url).href;
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
-const fullTitle = isHome ? `${site.name}: ${site.headline.replace(/\.$/, '')}` : `${title} | ${site.name}`;
+const fullTitle = Astro.props.fullTitle ?? (isHome ? `${site.name}: ${site.headline.replace(/\.$/, '')}` : `${title} | ${site.name}`);
 
 const sameAs = [site.linkedinCompany, site.instagram, site.x, site.googleBusinessProfile].filter(Boolean);
 
@@ -33,6 +39,21 @@ const orgSchema = {
   email: site.email,
   telephone: site.phone,
   priceRange: '₹₹',
+  // Monday to Saturday, 10am to 7pm IST (site.hours)
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '10:00',
+    closes: '19:00',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    telephone: site.phone,
+    email: site.email,
+    areaServed: 'IN',
+    availableLanguage: site.languages,
+  },
   address: {
     '@type': 'PostalAddress',
     ...(site.streetAddress && { streetAddress: site.streetAddress }),
@@ -53,6 +74,8 @@ const orgSchema = {
     name: site.founder,
     jobTitle: 'Founder',
     image: `${site.url}/brand/preetham-ram.jpg`,
+    description: site.founderBio,
+    knowsAbout: ['Search engine optimisation', 'Digital program management', 'Performance marketing', 'Marketing technology'],
     ...(site.linkedinFounder && { sameAs: [site.linkedinFounder] }),
   },
   knowsAbout: [
@@ -60,6 +83,9 @@ const orgSchema = {
     'Answer engine optimisation',
     'Generative engine optimisation',
     'Google AI Overviews',
+    'Regional-language SEO',
+    'Local SEO',
+    'Google Business Profile',
     'Website development',
     'Google Ads',
     'Meta ads',
@@ -74,7 +100,18 @@ const orgSchema = {
   ...(sameAs.length && { sameAs }),
 };
 
-const allSchema = [orgSchema, ...schema];
+const breadcrumbSchema = !isHome && !noindex && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ name: 'Home', path: '/' }, ...crumbs, { name: crumbName, path: canonical }].map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: new URL(c.path, site.url).href,
+  })),
+};
+
+const allSchema = [orgSchema, ...schema, ...(breadcrumbSchema ? [breadcrumbSchema] : [])];
 ---
 
 <!doctype html>
@@ -97,6 +134,9 @@ const allSchema = [orgSchema, ...schema];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nextmarg: Big-brand digital experience, sized for growing businesses. Measured on enquiries, not likes." />
     <meta property="og:locale" content="en_IN" />
     <meta name="twitter:card" content="summary_large_image" />
 

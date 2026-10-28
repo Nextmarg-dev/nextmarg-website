@@ -8,6 +8,10 @@ export const site = {
   description:
     'Nextmarg is a founder-led digital agency in Bengaluru. Websites, SEO and AI search (AEO, GEO, AIO), performance marketing, CRM and analytics for growing businesses, with every lead tracked.',
   founder: 'Preetham Ram',
+  founderBio:
+    'Digital program manager with 15+ years of experience delivering web, performance marketing, SEO and social media programs for global brands including VMware, Wipro, ITC and Quest Global.',
+  // Languages we can talk to clients in (schema contactPoint).
+  languages: ['English', 'Kannada', 'Hindi'],
   email: 'hello@nextmarg.com',
   phone: '+91 98866 97436',
   phoneHref: '+919886697436',
@@ -27,6 +31,8 @@ export const site = {
   instagram: '',
   x: '',
   googleBusinessProfile: 'https://g.page/r/CTOUfwWm807WEBM',
+  // Direct "write a review" link for the Google Business Profile, to share with happy clients.
+  googleReviewUrl: 'https://g.page/r/CTOUfwWm807WEBM/review',
   // Google Tag Manager container ID, e.g. "GTM-ABC1234". Leave empty until it exists.
   gtmId: 'GTM-K3K3CTRM',
   // Web3Forms access key (free at web3forms.com). Forms send to hello@nextmarg.com once set.

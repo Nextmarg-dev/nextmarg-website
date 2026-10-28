@@ -24,7 +24,7 @@ const schema = [
       name: site.founder,
       jobTitle: 'Founder',
       worksFor: { '@id': `${site.url}/#org` },
-      description: 'Digital program manager with 15+ years of experience delivering web, performance marketing, SEO and social media programs for global brands including VMware, Wipro, ITC and Quest Global.',
+      description: site.founderBio,
       ...(site.linkedinFounder && { sameAs: [site.linkedinFounder] }),
     },
   },
@@ -33,6 +33,7 @@ const schema = [
 
 <Base
   title="About"
+  fullTitle="About Nextmarg: founder-led digital agency in Bengaluru"
   description="Nextmarg means the next path. A founder-led digital agency in Bengaluru, started by Preetham Ram after 15+ years delivering digital programs for VMware, Wipro, ITC and Quest Global."
   schema={schema}
 >
