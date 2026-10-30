@@ -15,6 +15,7 @@ const year = new Date().getFullYear();
         <h3>Services</h3>
         <ul>
           {groups.map((g) => <li><a href={`/services#${g.id}`}>{g.title}</a></li>)}
+          <li><a href="/services/seo-ai-search">SEO and AI search</a></li>
         </ul>
       </div>
       <div>
@@ -22,6 +23,7 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href="/digital-health-score">Digital Health Score</a></li>
           <li><a href="/work">Work</a></li>
+          <li><a href="/guides">Guides</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
           <li><a href="/privacy">Privacy notice</a></li>
@@ -34,12 +36,14 @@ const year = new Date().getFullYear();
           <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
           <li><a href={`tel:${site.phoneHref}`}>{site.phone}</a></li>
           <li><a href={whatsappLink} target="_blank" rel="noopener">WhatsApp</a></li>
+          {site.googleBusinessProfile && <li><a href={site.googleBusinessProfile} target="_blank" rel="noopener">Find us on Google</a></li>}
           <li style="color:rgba(246,242,234,.7)">{site.city}, {site.region}, India</li>
         </ul>
       </div>
     </div>
     <div class="footer-base">
       <span>© {year} Nextmarg. All rights reserved.</span>
+      <span><a href="/kn" lang="kn" hreflang="kn-IN">ಕನ್ನಡ</a> · <a href="/hi" lang="hi" hreflang="hi-IN">हिन्दी</a></span>
       <span>Your accounts, domain and data always stay in your name.</span>
     </div>
   </div>

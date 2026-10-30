@@ -1,0 +1,143 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../data/site';
+import { guides } from '../../data/guides';
+
+const guide = guides.find((g) => g.slug === 'get-recommended-by-chatgpt')!;
+const dateLabel = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${site.url}/guides/${guide.slug}#article`,
+    headline: guide.title,
+    description: guide.summary,
+    image: `${site.url}/og-image.png`,
+    datePublished: guide.published,
+    dateModified: guide.updated,
+    inLanguage: 'en-IN',
+    mainEntityOfPage: `${site.url}/guides/${guide.slug}`,
+    author: { '@id': `${site.url}/about#founder`, '@type': 'Person', name: site.founder, url: `${site.url}/about` },
+    publisher: { '@id': `${site.url}/#org` },
+    about: ['Generative engine optimisation', 'Answer engine optimisation', 'Google AI Overviews', 'Local SEO'],
+  },
+];
+---
+
+<Base
+  title={guide.title}
+  fullTitle="How to get your business recommended by ChatGPT | Nextmarg"
+  description="An eight-step checklist for Indian businesses to show up in ChatGPT, Gemini, Perplexity and Google AI Overviews: test, open up, get listed, answer, get mentioned, track."
+  crumbs={[{ name: 'Guides', path: '/guides' }]}
+  crumbName="Get recommended by ChatGPT"
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap" style="max-width:860px">
+      <span class="kicker">Guide · AI search</span>
+      <h1 class="display">{guide.title}</h1>
+      <p class="lead">
+        By <a href="/about">{site.founder}</a>, founder of Nextmarg · Published {dateLabel(guide.published)}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <article class="wrap prose">
+      <p class="lead" style="max-width:none">
+        <strong>The short answer:</strong> AI tools like ChatGPT, Gemini, Perplexity and Google AI Overviews name the businesses they can find,
+        understand and trust. Let their crawlers read your site, keep your business details identical everywhere, publish one clear page per
+        service with prices and areas, answer real customer questions in plain words, and get other trusted sites and reviewers to mention you.
+        Then test the same questions every month.
+      </p>
+
+      <h2>How AI tools decide which businesses to name</h2>
+      <p>
+        When someone asks "best physiotherapist in HSR Layout", most AI assistants now search the web before they answer. Google's AI
+        Overviews and AI Mode draw on Google's index. Microsoft Copilot uses Bing. ChatGPT and Perplexity run their own web searches. Each
+        then picks a few businesses that several sources agree on.
+      </p>
+      <p>That means three things matter:</p>
+      <ul>
+        <li><strong>Can they read you?</strong> Your site must be open to their crawlers and indexed by both Google and Bing.</li>
+        <li><strong>Do they understand you?</strong> Your pages must say clearly what you do, where, for whom and at what price.</li>
+        <li><strong>Do others vouch for you?</strong> Reviews, directories, news and industry lists that mention you by name.</li>
+      </ul>
+
+      <h2>Step 1: Test where you stand today</h2>
+      <p>
+        Write down 10 questions a customer would really ask, such as "best dentist near Indiranagar for kids" or "who sets up Zoho CRM in
+        Bengaluru". Ask each one in ChatGPT, Gemini, Perplexity, Copilot and Google, using a private browser window. Note who gets named and
+        which websites are linked as sources. Those source sites are where you need to appear.
+      </p>
+
+      <h2>Step 2: Let AI crawlers read your website</h2>
+      <p>
+        Open <code>yourwebsite.com/robots.txt</code>. If you see <code>Disallow: /</code> under GPTBot, OAI-SearchBot, PerplexityBot,
+        ClaudeBot or Google-Extended, those tools can't read you. If your site uses Cloudflare, also check <em>Security → Bots</em>: newer
+        Cloudflare accounts can block AI crawlers by default. Allow at least the search crawlers.
+      </p>
+
+      <h2>Step 3: Make your business details identical everywhere</h2>
+      <p>
+        Your name, phone number, address or service area and hours should match exactly on your website, Google Business Profile, Bing
+        Places, Justdial, Practo or IndiaMART, and social profiles. Mismatched details make AI tools less sure you are one real business.
+      </p>
+
+      <h2>Step 4: One clear page for each service</h2>
+      <p>
+        A single "Services" page listing ten things is hard for AI to quote. Give each main service its own page that answers, in the first
+        two sentences: what it is, who it's for, where you offer it, and a starting price. AI tools prefer pages that state facts plainly over
+        pages that only say "contact us for details".
+      </p>
+
+      <h2>Step 5: Answer real questions, in your customers' words</h2>
+      <p>
+        Add a short FAQ to each service page using the questions customers ask you on the phone and WhatsApp. Start each answer with the
+        answer itself, then the detail. Ask your web developer to add <em>schema markup</em> (structured data) for your business, services
+        and FAQs, so machines read the same facts people do.
+      </p>
+
+      <h2>Step 6: Get mentioned on sites AI tools trust</h2>
+      <p>
+        This is the step most businesses skip, and the one that matters most for recommendations. Ask happy customers for Google reviews
+        that mention the service and area. Get listed on the directories that appeared in your Step 1 sources. Get quoted in local news,
+        association websites and "top 10" lists in your industry. Never buy fake reviews: Google removes them and can suspend your profile.
+      </p>
+
+      <h2>Step 7: Add your customers' language</h2>
+      <p>
+        If many of your customers think and search in Kannada, Hindi, Tamil or Telugu, add pages in that language, written naturally and
+        checked by a native speaker. Very few local businesses have them, so it is one of the easiest ways to stand out in both Google and
+        AI answers.
+      </p>
+
+      <h2>Step 8: Track the same questions every month</h2>
+      <p>
+        Repeat your Step 1 test on the same date each month and keep a simple sheet: question, tool, were you named, who was named instead.
+        AI answers vary, so look at the trend over three months rather than one result. Pair it with Google Search Console and Bing Webmaster
+        Tools, which are free and show the searches that already bring people to your site.
+      </p>
+
+      <h2>What doesn't work</h2>
+      <ul>
+        <li>Anyone who guarantees you a place in ChatGPT. Nobody controls AI answers.</li>
+        <li>Stuffing pages with keywords or city names. AI tools summarise meaning, not repetition.</li>
+        <li>An <code>llms.txt</code> file on its own. It is a cheap, sensible extra, but no major AI tool has said it uses it for ranking.</li>
+        <li>Fake or paid reviews. They break Google's rules and can get your listing suspended.</li>
+      </ul>
+
+      <h2>Want us to check for you?</h2>
+      <p>
+        Nextmarg's free <a href="/digital-health-score">Digital Health Score</a> includes an AI search check: we test real customer questions
+        across the main AI tools and tell you your top five fixes. If you'd like us to do the work, see our
+        <a href="/services/seo-ai-search">SEO and AI search services</a>.
+      </p>
+      <p class="small muted">Last updated {dateLabel(guide.updated)}.</p>
+    </article>
+  </section>
+
+  <CtaBand title="Does ChatGPT recommend you, or your competitor?" />
+</Base>

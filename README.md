@@ -18,6 +18,7 @@ npm run build    # outputs to dist/
 | Services, examples, starting prices, bundles | `src/data/services.ts` |
 | Pillars, promise, track record, homepage FAQs | `src/data/content.ts` |
 | Pages | `src/pages/` |
+| Guides list (add new guides here, newest first) | `src/data/guides.ts`, pages in `src/pages/guides/` |
 | Brand colours, type and layout | `src/styles/global.css` |
 | Logos, favicon, share image | `public/` |
 | AI-crawler rules and AI summary | `public/robots.txt`, `public/llms.txt` |

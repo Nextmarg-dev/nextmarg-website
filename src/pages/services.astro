@@ -58,19 +58,13 @@ const schema = [
     '@type': 'FAQPage',
     mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
-      { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.url}/services` },
-    ],
-  },
 ];
 ---
 
 <Base
   title="Services and prices"
+  fullTitle="Services and prices: SEO, AI search, websites, ads | Nextmarg"
+  crumbName="Services"
   description="Websites, SEO and AI search (AEO, GEO, AIO), Google Business Profile, ads, CRM, GA4, WhatsApp automation and newsletters. Fixed-price starting points from a Bengaluru digital agency."
   schema={schema}
 >
@@ -124,7 +118,10 @@ const schema = [
             <p class="lead">{g.summary}</p>
             <p><strong>Best for:</strong> {g.bestFor}</p>
             {g.id === 'get-found' && (
-              <p class="small muted">We promise the work and the tracking. Nobody can guarantee a place in AI answers, and we won't pretend to.</p>
+              <>
+                <p><a class="accent" style="font-weight:600" href="/services/seo-ai-search">How our SEO and AI search work is done, step by step</a></p>
+                <p class="small muted">We promise the work and the tracking. Nobody can guarantee a place in AI answers, and we won't pretend to.</p>
+              </>
             )}
             <div class="actions"><a class="btn" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>Start with a free score</a></div>
           </div>
