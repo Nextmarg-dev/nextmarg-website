@@ -13,10 +13,10 @@ export const site = {
   // Languages we can talk to clients in (schema contactPoint).
   languages: ['English', 'Kannada', 'Hindi'],
   email: 'hello@nextmarg.com',
-  phone: '+91 98866 97436',
-  phoneHref: '+919886697436',
+  phone: '+91 86187 61913',
+  phoneHref: '+918618761913',
   // WhatsApp number in international format without "+" or spaces.
-  whatsapp: '919886697436',
+  whatsapp: '918618761913',
   whatsappText: "Hi, I'd like a Digital Health Score for my business.",
   city: 'Bengaluru',
   region: 'Karnataka',
