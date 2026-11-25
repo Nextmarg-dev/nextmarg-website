@@ -41,4 +41,5 @@ export const site = {
   bookingUrl: '',
 };
 
-export const whatsappLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}`;
+export const whatsappLinkFor = (text: string) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
+export const whatsappLink = whatsappLinkFor(site.whatsappText);

@@ -1,0 +1,133 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../data/site';
+import { guides } from '../../data/guides';
+
+const guide = guides.find((g) => g.slug === 'google-business-profile-checklist')!;
+const dateLabel = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${site.url}/guides/${guide.slug}#article`,
+    headline: guide.title,
+    description: guide.summary,
+    image: `${site.url}/og-image.png`,
+    datePublished: guide.published,
+    dateModified: guide.updated,
+    inLanguage: 'en-IN',
+    mainEntityOfPage: `${site.url}/guides/${guide.slug}`,
+    author: { '@id': `${site.url}/about#founder`, '@type': 'Person', name: site.founder, url: `${site.url}/about` },
+    publisher: { '@id': `${site.url}/#org` },
+    about: ['Google Business Profile', 'Local SEO', 'Google Maps', 'Online reviews'],
+  },
+];
+---
+
+<Base
+  title={guide.title}
+  fullTitle="Google Business Profile checklist for local businesses in India | Nextmarg"
+  description="A 12-point Google Business Profile checklist for clinics, salons, stores and service firms in India: category, services, photos, reviews, posts and tracking."
+  crumbs={[{ name: 'Guides', path: '/guides' }]}
+  crumbName="Google Business Profile checklist"
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap" style="max-width:860px">
+      <span class="kicker">Guide · Google Maps</span>
+      <h1 class="display">{guide.title}</h1>
+      <p class="lead">
+        By <a href="/about">{site.founder}</a>, founder of Nextmarg · Published {dateLabel(guide.published)}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <article class="wrap prose">
+      <p class="lead" style="max-width:none">
+        <strong>The short answer:</strong> pick the most accurate primary category, fill in every service with a description, add real photos
+        every month, ask every happy customer for a review and reply to all of them, post an update every week, and tag your website link so
+        you can see the enquiries it brings. Google ranks local listings on how relevant, how close and how prominent they are, and these are
+        the parts you control.
+      </p>
+
+      <h2>Get the basics exactly right</h2>
+      <p><strong>1. Business name.</strong> Use your real name as it appears on your board and bills. Adding keywords or areas to the name breaks Google's rules and can get the listing suspended.</p>
+      <p>
+        <strong>2. Primary category.</strong> This is the single biggest choice. Pick the most specific one that matches what you mainly do,
+        such as "Dental clinic" rather than "Doctor", then add a few secondary categories for other real services.
+      </p>
+      <p>
+        <strong>3. Address or service area.</strong> If customers visit you, show the address and set the pin carefully. If you go to your
+        customers, hide the address and list the areas you serve instead. Never use a virtual office address.
+      </p>
+      <p>
+        <strong>4. Phone, website and hours.</strong> Use the number you actually answer, a WhatsApp-enabled number if possible. Keep hours
+        current, and add special hours for festivals and holidays so nobody turns up to a closed shutter.
+      </p>
+
+      <h2>Show what you sell</h2>
+      <p>
+        <strong>5. Services or products.</strong> Add each one with a short description and a price or price range. These help Google match
+        you to specific searches such as "root canal" or "hair spa", and AI tools read them too.
+      </p>
+      <p><strong>6. Description.</strong> Use the 750 characters to say what you do, for whom, where, and what makes you different. Put the most important line first.</p>
+      <p>
+        <strong>7. Photos.</strong> Add your logo, a cover photo, the outside of your premises so people can find it, the inside, your team at
+        work and your products. Real photos beat stock images. Add a few new ones every month.
+      </p>
+
+      <h2>Earn trust with reviews</h2>
+      <p>
+        <strong>8. Ask every happy customer.</strong> Use the "Ask for reviews" link from your profile on a QR card at the counter and in a
+        WhatsApp message after the visit or job. Ask them to mention the service and the area in their own words.
+      </p>
+      <p>
+        <strong>9. Reply to every review</strong>, good and bad, within a few days. Thank people by name, and answer complaints calmly with
+        what you have fixed. Future customers read the replies.
+      </p>
+      <p>
+        <strong>Never</strong> buy reviews, offer discounts in return for them, or ask only the customers you know are happy while steering
+        others away. Google treats all of these as fake engagement and can remove reviews or suspend the profile.
+      </p>
+
+      <h2>Keep it active</h2>
+      <p>
+        <strong>10. Post weekly.</strong> Share an offer, a tip, a new product or a recent job, with a photo and a button. Posts show that the
+        business is active and give people a reason to call now.
+      </p>
+      <p>
+        <strong>11. Keep details the same everywhere.</strong> Your name, phone and area should match on your website, Justdial, Practo,
+        IndiaMART, Bing Places and social profiles. Different details confuse both Google and AI tools.
+      </p>
+
+      <h2>Measure what it brings</h2>
+      <p>
+        <strong>12. Tag your website link</strong> with a UTM code, for example
+        <code>?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=gbp</code>, so Google Analytics shows visits and enquiries from your
+        listing separately. Check the Performance tab monthly for calls, direction requests and website clicks, and write the numbers down so
+        you can see the trend.
+      </p>
+
+      <h2>A simple monthly routine</h2>
+      <ul>
+        <li>Week 1: add 3 to 5 new photos and check hours, especially before festivals.</li>
+        <li>Every week: one post, and replies to all new reviews.</li>
+        <li>Every customer: one review request on WhatsApp or the QR card.</li>
+        <li>Month end: note calls, directions, website clicks and new reviews in a sheet.</li>
+      </ul>
+
+      <h2>Want us to check yours?</h2>
+      <p>
+        Nextmarg's free <a href="/digital-health-score">Digital Health Score</a> checks your Google Business Profile along with your website,
+        AI search and tracking, and gives you your top five fixes. If you'd rather hand it over, our Local Profile Plan runs the routine above
+        for you. See <a href="/services#prices">prices</a>.
+      </p>
+      <p class="small muted">Last updated {dateLabel(guide.updated)}.</p>
+    </article>
+  </section>
+
+  <CtaBand title="Is your Google listing winning the calls, or your competitor's?" />
+</Base>

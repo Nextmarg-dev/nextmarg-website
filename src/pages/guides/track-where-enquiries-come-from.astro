@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../data/site';
+import { guides } from '../../data/guides';
+
+const guide = guides.find((g) => g.slug === 'track-where-enquiries-come-from')!;
+const dateLabel = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${site.url}/guides/${guide.slug}#article`,
+    headline: guide.title,
+    description: guide.summary,
+    image: `${site.url}/og-image.png`,
+    datePublished: guide.published,
+    dateModified: guide.updated,
+    inLanguage: 'en-IN',
+    mainEntityOfPage: `${site.url}/guides/${guide.slug}`,
+    author: { '@id': `${site.url}/about#founder`, '@type': 'Person', name: site.founder, url: `${site.url}/about` },
+    publisher: { '@id': `${site.url}/#org` },
+    about: ['Marketing attribution', 'Google Analytics 4', 'UTM parameters', 'WhatsApp Business', 'Lead tracking'],
+  },
+];
+---
+
+<Base
+  title={guide.title}
+  fullTitle="How to track where your enquiries come from | Nextmarg"
+  description="A simple way for Indian small businesses to see which channel brings calls, WhatsApp chats and form enquiries: UTM links, tagged WhatsApp messages, GA4 events and a one-page sheet."
+  crumbs={[{ name: 'Guides', path: '/guides' }]}
+  crumbName="Track where enquiries come from"
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap" style="max-width:860px">
+      <span class="kicker">Guide · Tracking</span>
+      <h1 class="display">{guide.title}</h1>
+      <p class="lead">
+        By <a href="/about">{site.founder}</a>, founder of Nextmarg · Published {dateLabel(guide.published)}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <article class="wrap prose">
+      <p class="lead" style="max-width:none">
+        <strong>The short answer:</strong> give every channel its own tagged link, give every WhatsApp button its own pre-filled message, count
+        calls, chats and forms as events in Google Analytics 4, ask every new customer how they found you, and write the totals in one sheet
+        each month. After three months you will know which rupee brings which enquiry, and you can stop paying for what doesn't.
+      </p>
+
+      <h2>Why likes and visits are not enough</h2>
+      <p>
+        Followers, reach and website visits are easy to count, but they don't pay salaries. What matters is how many people called, messaged
+        or filled a form, where they came from, and how many became customers. Most small businesses in India get enquiries on three
+        channels: phone, WhatsApp and website forms. Track all three.
+      </p>
+
+      <h2>Step 1: Tag every link you share</h2>
+      <p>
+        Add UTM tags to the website link on your Google Business Profile, Instagram bio, Facebook page, WhatsApp status, emails and ads. A
+        UTM tag is a short code at the end of a link, for example
+        <code>?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=bio</code>. Google Analytics then shows those visits separately.
+        Google's free Campaign URL Builder makes the links for you. Keep a list of every tagged link so the names stay consistent.
+      </p>
+
+      <h2>Step 2: Give each WhatsApp button its own message</h2>
+      <p>
+        A <code>wa.me</code> link can carry a pre-filled message. Use a different one per place: "Hi, I saw your Instagram post", "Hi, I found
+        you on Google", "Hi, I'm on your pricing page". When the chat arrives, you know where it came from without asking. In WhatsApp
+        Business, add a label to each chat, such as "Instagram" or "Google", so you can count them at month end.
+      </p>
+
+      <h2>Step 3: Count calls, chats and forms in Google Analytics 4</h2>
+      <p>
+        Set up Google Tag Manager to send an event to GA4 whenever someone taps a phone number, a WhatsApp button or an email link, and when a
+        form is actually submitted, not just opened. Mark the form submission as a key event. Your GA4 reports then show enquiries by
+        source, not just visits. Ask for consent before analytics cookies load, as India's DPDP Act expects.
+      </p>
+
+      <h2>Step 4: Ask every new customer one question</h2>
+      <p>
+        Calls from Google Maps or a printed flyer don't always pass through your website. So ask every new customer "How did you hear about
+        us?" and note it in your billing software, CRM or a simple sheet. If you run ads, Google and Meta can also show you calls made
+        straight from an ad.
+      </p>
+
+      <h2>Step 5: One sheet, once a month</h2>
+      <p>On the first working day of each month, fill in one row per channel:</p>
+      <ul>
+        <li><strong>Channel:</strong> Google Maps, Google search, Instagram, ads, referrals, walk-in.</li>
+        <li><strong>Enquiries:</strong> calls, WhatsApp chats and forms, from GA4, WhatsApp labels and your notes.</li>
+        <li><strong>Customers:</strong> how many of those enquiries paid.</li>
+        <li><strong>Cost:</strong> ad spend, agency fees and your time.</li>
+        <li><strong>Cost per customer:</strong> cost divided by customers.</li>
+      </ul>
+      <p>
+        Look at the trend over three months, not one. Then move money and time towards the channel with the lowest cost per customer, and
+        fix or drop the rest.
+      </p>
+
+      <h2>Common mistakes</h2>
+      <ul>
+        <li>Counting form opens or page views as leads. Count only real submissions, calls and chats.</li>
+        <li>Using one WhatsApp link everywhere, so every chat looks the same.</li>
+        <li>Forgetting offline sources such as referrals and walk-ins, which are often the best ones.</li>
+        <li>Judging a channel after two weeks. Most need a few months to show a clear pattern.</li>
+      </ul>
+
+      <h2>Want it set up for you?</h2>
+      <p>
+        Every Nextmarg plan includes this tracking. Our Tracking Health Check audits and fixes GA4 and Tag Manager for an existing site and
+        gives you one dashboard. See <a href="/services#prices">prices</a>, or start with the free
+        <a href="/digital-health-score">Digital Health Score</a>, which checks your tracking along with Google and AI search.
+      </p>
+      <p class="small muted">Last updated {dateLabel(guide.updated)}.</p>
+    </article>
+  </section>
+
+  <CtaBand title="Do you know your cost per enquiry?" />
+</Base>
