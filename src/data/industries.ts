@@ -147,6 +147,90 @@ export const industries: Industry[] = [
     ],
   },
   {
+    slug: 'restaurants',
+    name: 'Restaurants and cafes',
+    who: 'a restaurant',
+    title: 'Digital marketing for restaurants and cafes in Bengaluru',
+    description:
+      'Fill more tables and get more direct orders: Google Maps, reviews, menu and photos, Instagram Reels, WhatsApp orders and festive offers, with every booking tracked. Founder-led agency in Bengaluru.',
+    h1: 'More tables filled and more direct orders for your restaurant',
+    lead: 'Diners decide where to eat in a few taps: Google Maps, photos, reviews and the menu. We make your restaurant the obvious choice nearby, and bring more orders to you directly instead of through apps that take a big cut.',
+    searches: ['restaurants near me open now', 'best biryani in Koramangala', 'cafe with outdoor seating Indiranagar', 'ಹತ್ತಿರದ ಒಳ್ಳೆ ಹೋಟೆಲ್'],
+    problems: [
+      { title: 'Delivery apps take a big share of every order', text: 'Regulars who already know you can order on WhatsApp or call, and keep the margin with you.' },
+      { title: 'Your Maps listing has old photos and no menu', text: 'Diners pick the place whose food they can see, with prices and opening hours they can trust.' },
+      { title: 'Weekday lunches and slow evenings', text: 'Offers that reach people nearby at the right time can fill quiet slots.' },
+    ],
+    plan: [
+      { title: 'Google Maps', text: 'Menu, prices, dish photos, hours and special hours for festivals, weekly posts and a review QR card on every table.' },
+      { title: 'Reviews', text: 'A gentle review request after the meal or with the bill, and a reply to every review within a few days.' },
+      { title: 'Instagram and Reels', text: 'Dish and kitchen Reels shot on a phone, edited and branded, each with the location and a way to book or order.' },
+      { title: 'Direct orders on WhatsApp', text: 'A WhatsApp Business menu catalog, quick replies and labels, so regulars can order without an app.' },
+      { title: 'Tracking', text: 'Calls, direction requests, WhatsApp orders and table bookings counted by source every month.' },
+    ],
+    starter: {
+      name: 'Local Starter bundle',
+      price: 'Quoted after a free Health Score',
+      what: 'Google Business Profile, review system, answer-ready FAQs, 8 to 12 creatives and 4 Reels a month, and WhatsApp Business.',
+    },
+    faqs: [
+      {
+        q: 'Should we stop using delivery apps?',
+        a: 'No. They bring new customers. The aim is to move your regulars to direct orders on WhatsApp or phone, where you keep more of each bill.',
+      },
+      {
+        q: 'Who takes the food photos and videos?',
+        a: 'Your team can shoot short clips on a phone using our shot list, and we edit and brand them. For a menu launch we can arrange a proper shoot.',
+      },
+      {
+        q: 'Can we show our menu on Google?',
+        a: 'Yes. You can add a menu with prices and dish photos to your Google Business Profile, and we keep it updated when prices change.',
+      },
+    ],
+  },
+  {
+    slug: 'jewellery-stores',
+    name: 'Jewellery stores',
+    who: 'a jewellery store',
+    title: 'Digital marketing for jewellery stores in Bengaluru',
+    description:
+      'Bring more serious buyers to your jewellery store: Google Maps, collection posts and Reels, a WhatsApp catalog, wedding and festive campaigns, and an online store when you are ready.',
+    h1: 'More walk-ins and enquiries for your jewellery store',
+    lead: 'Buyers browse designs online long before they visit, especially for weddings and festivals. We put your collections in front of them, build trust in your purity and pricing, and turn browsing into store visits and WhatsApp enquiries.',
+    searches: ['jewellery shop near me', 'hallmark gold jewellery in Jayanagar', 'bridal necklace designs Bengaluru', 'silver anklets shop near me'],
+    problems: [
+      { title: 'Buyers compare designs online first', text: 'If your collections are not on Google, Instagram or WhatsApp, they shortlist someone else before they leave home.' },
+      { title: 'Trust decides the purchase', text: 'Buyers look for hallmarking, clear making charges, exchange policies and real reviews before they visit.' },
+      { title: 'Wedding and festive seasons come and go', text: 'Campaigns planned late miss Akshaya Tritiya, Dhanteras and the wedding months when most buying happens.' },
+    ],
+    plan: [
+      { title: 'Google Maps', text: 'A complete profile with store photos, collections, hallmarking and exchange details, weekly posts and a review QR card at the counter.' },
+      { title: 'Collections on Instagram', text: 'Design photos and Reels of new arrivals, bridal sets and everyday pieces, each with a WhatsApp link to ask about price and weight.' },
+      { title: 'WhatsApp catalog', text: 'Your best designs in a WhatsApp catalog, with quick replies for price, weight and availability, and labels to follow up serious buyers.' },
+      { title: 'Season campaigns', text: 'A calendar planned months ahead for weddings and festivals, with local ads shown only to people near your store.' },
+      { title: 'Online store when ready', text: 'A Shopify or WooCommerce store in your name for lighter and silver pieces, with no lock-in.' },
+    ],
+    starter: {
+      name: 'Local Profile Plan',
+      price: 'From ₹6,000 a month',
+      what: 'Google Business Profile posts, collections and offers, review replies, a review QR card and a monthly report. Add Instagram or ads for the festive season.',
+    },
+    faqs: [
+      {
+        q: 'Should we show prices online?',
+        a: 'Gold prices change daily, so most stores show designs, weight ranges and making charges, and share the final price on WhatsApp or in store. We set up quick replies so that is fast.',
+      },
+      {
+        q: 'Can you photograph our jewellery?',
+        a: 'For catalogs we work with a product photographer or set up a simple shooting kit in your store. AI is never used to change how a real piece looks.',
+      },
+      {
+        q: 'When should festive campaigns start?',
+        a: 'About six to eight weeks before the festival or wedding season, so posts, ads and offers are ready when people start browsing.',
+      },
+    ],
+  },
+  {
     slug: 'recruitment-firms',
     name: 'Recruitment firms',
     who: 'a recruitment firm',
