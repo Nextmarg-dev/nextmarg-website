@@ -1,0 +1,129 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { site, whatsappLinkFor } from '../../data/site';
+import { industries, type Industry } from '../../data/industries';
+
+export function getStaticPaths() {
+  return industries.map((industry) => ({ params: { slug: industry.slug }, props: { industry } }));
+}
+
+const { industry } = Astro.props as { industry: Industry };
+const waText = `Hi, I run ${industry.who} and I'd like a free Digital Health Score.`;
+const waLink = whatsappLinkFor(waText);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${site.url}/industries/${industry.slug}#service`,
+    name: industry.title,
+    serviceType: 'Digital marketing',
+    description: industry.description,
+    provider: { '@id': `${site.url}/#org` },
+    audience: { '@type': 'BusinessAudience', name: industry.name },
+    areaServed: [
+      { '@type': 'City', name: 'Bengaluru' },
+      { '@type': 'Country', name: 'India' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: industry.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title={industry.title}
+  description={industry.description}
+  crumbs={[{ name: 'Industries', path: '/industries' }]}
+  crumbName={industry.name}
+  schema={schema}
+  whatsappText={waText}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Industries · {industry.name}</span>
+      <h1 class="display" style="max-width:900px">{industry.h1}</h1>
+      <p class="lead">{industry.lead}</p>
+      <div class="actions">
+        <a class="btn" href="/digital-health-score"><span class="dot" aria-hidden="true"></span>Get a free Health Score for my business</a>
+        <a class="btn btn--ghost" href={waLink} target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Sound familiar?</span>
+        <h2>What we hear from owners like you</h2>
+      </div>
+      <div class="grid grid--3">
+        {industry.problems.map((p) => (
+          <div class="card card--linen">
+            <h3>{p.title}</h3>
+            <p class="muted">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">The plan</span>
+        <h2>What we set up for you</h2>
+        <p class="lead">Every step is tracked, so you see which rupee brought which enquiry.</p>
+      </div>
+      <div class="grid grid--3">
+        {industry.plan.map((p, i) => (
+          <div class="card">
+            <span class="num">0{i + 1}</span>
+            <h3>{p.title}</h3>
+            <p class="muted">{p.text}</p>
+          </div>
+        ))}
+        <div class="card" style="background:var(--forest);color:var(--linen);border-color:var(--forest)">
+          <span class="num" style="color:var(--sand)">Your customers search for</span>
+          <ul class="ticks" style="margin-top:12px">
+            {industry.searches.map((s) => <li>"{s}"</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid--2" style="gap:48px;align-items:start">
+      <div>
+        <span class="kicker">Where to start</span>
+        <h2>Start small, add more when it works</h2>
+        <p class="lead">
+          Begin with the free Digital Health Score. It shows where you stand on Google, AI search, your website, reviews and tracking, with
+          your top five fixes. Then pick the one step that will bring the most enquiries.
+        </p>
+        <p class="small muted">Your accounts, domain and data always stay in your name. Monthly plans have 30 days' notice and no lock-in.</p>
+      </div>
+      <div class="card">
+        <span class="num">{industry.starter.price}</span>
+        <h3>{industry.starter.name}</h3>
+        <p class="muted">{industry.starter.what}</p>
+        <a class="accent" style="font-weight:600" href="/services#prices">See all prices</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions from {industry.name.toLowerCase()}</h2></div>
+      <Faq items={industry.faqs} />
+    </div>
+  </section>
+
+  <CtaBand title={`Is ${industry.who} like yours easy to find on Google and ChatGPT?`} />
+</Base>

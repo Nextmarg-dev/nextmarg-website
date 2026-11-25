@@ -1,6 +1,7 @@
 ---
 import { site, whatsappLink } from '../data/site';
 import { groups } from '../data/services';
+import { industries } from '../data/industries';
 const year = new Date().getFullYear();
 ---
 
@@ -22,6 +23,7 @@ const year = new Date().getFullYear();
         <h3>Company</h3>
         <ul>
           <li><a href="/digital-health-score">Digital Health Score</a></li>
+          {industries.map((i) => <li><a href={`/industries/${i.slug}`}>For {i.name.toLowerCase()}</a></li>)}
           <li><a href="/work">Work</a></li>
           <li><a href="/guides">Guides</a></li>
           <li><a href="/about">About</a></li>

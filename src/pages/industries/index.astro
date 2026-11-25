@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../data/site';
+import { industries } from '../../data/industries';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Industries Nextmarg works with',
+    url: `${site.url}/industries`,
+    publisher: { '@id': `${site.url}/#org` },
+    hasPart: industries.map((i) => ({ '@type': 'WebPage', name: i.title, url: `${site.url}/industries/${i.slug}` })),
+  },
+];
+---
+
+<Base
+  title="Industries"
+  fullTitle="Digital marketing by industry: clinics, salons, retail, recruitment | Nextmarg"
+  description="How Nextmarg helps clinics, salons, retail stores and recruitment firms get found on Google and in AI answers, and turn that into tracked enquiries."
+  schema={schema}
+>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="kicker">Industries</span>
+      <h1 class="display" style="max-width:860px">A plan built for your kind of business</h1>
+      <p class="lead">Each industry finds customers differently. Pick yours to see what we would set up first.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid--2">
+      {industries.map((i) => (
+        <a class="card" href={`/industries/${i.slug}`}>
+          <span class="num">{i.name}</span>
+          <h2 class="h3">{i.h1}</h2>
+          <p class="muted">{i.lead}</p>
+        </a>
+      ))}
+    </div>
+    <div class="wrap">
+      <p class="small muted" style="margin-top:24px">
+        Don't see your industry? We also work with restaurants, real estate, education, D2C brands and B2B firms.
+        <a href="/contact">Tell us about your business</a>.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
